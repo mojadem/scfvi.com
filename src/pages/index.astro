@@ -1,16 +1,42 @@
 ---
-
+const entries = await Astro.locals.pb
+  .collection("entries")
+  .getFullList({ expand: "campaign,type" });
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>SCFVI</title>
-	</head>
-	<body>
-		<h1>Saudi Cyberfeminism Visual Index</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>SCFVI</title>
+  </head>
+  <body>
+    <header>
+      <h1>Saudi Cyberfeminism Visual Index</h1>
+    </header>
+    <main>
+      <table>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Campaign</th>
+          <th>Type</th>
+        </tr>
+        {
+          entries.map((entry) => (
+            <tr>
+              <td>{entry.year}</td>
+              <td>{entry.title}</td>
+              <td>{entry.author}</td>
+              <td>{entry.expand["campaign"].name}</td>
+              <td>{entry.expand["type"].name}</td>
+            </tr>
+          ))
+        }
+      </table>
+    </main>
+  </body>
 </html>
