@@ -7,16 +7,17 @@ const entries = await Astro.locals.pb
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>SCFVI</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
   </head>
   <body>
-    <header>
-      <h1>Saudi Cyberfeminism Visual Index</h1>
-    </header>
-    <main>
+    <main class="container">
+      <h1>SAUDI CYBERFEMINISM VISUAL INDEX</h1>
       <table>
         <tr>
           <th>Year</th>
@@ -24,6 +25,7 @@ const entries = await Astro.locals.pb
           <th>Author</th>
           <th>Campaign</th>
           <th>Type</th>
+          <th></th>
         </tr>
         {
           entries.map((entry) => (
@@ -33,6 +35,11 @@ const entries = await Astro.locals.pb
               <td>{entry.author}</td>
               <td>{entry.expand["campaign"].name}</td>
               <td>{entry.expand["type"].name}</td>
+              <td>
+                <a href={entry.link} target="_blank">
+                  Link
+                </a>
+              </td>
             </tr>
           ))
         }
@@ -40,3 +47,18 @@ const entries = await Astro.locals.pb
     </main>
   </body>
 </html>
+
+<style>
+  * {
+    background-color: black;
+  }
+
+  body {
+    font-family: "Gabarito Variable", system-ui;
+  }
+
+  h1 {
+    color: #e850ff;
+    width: 100%;
+  }
+</style>
