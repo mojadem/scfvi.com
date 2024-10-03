@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.3",
     "@astrojs/ts-plugin": "^1.10.2",
+    "@fontsource-variable/gabarito": "^5.1.0",
     "astro": "^4.15.6",
     "pocketbase": "^0.21.5",
     "typescript": "^5.6.2"
