@@ -28,9 +28,11 @@ interface TypedPocketBase extends PocketBase {
 	collection(idOrName: 'types'): RecordService<Type>;
 }
 
-const db = new PocketBase('https://scfvi.pockethost.io/') as TypedPocketBase;
+export function init(): TypedPocketBase {
+	return new PocketBase('https://scfvi.pockethost.io') as TypedPocketBase;
+}
 
-export async function getAllEntries() {
+export async function getAllEntries(db: TypedPocketBase) {
 	const entries = await db.collection('entries').getFullList({ expand: 'campaign,type' });
 	return entries;
 }
