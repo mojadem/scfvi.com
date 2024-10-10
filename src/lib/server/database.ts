@@ -8,7 +8,7 @@ interface Entry {
 	link: string;
 	campaign: string;
 	type: string;
-	expand: Record<string, Campaign | Type>;
+	expand: Record<'campaign' | 'type', Campaign | Type>;
 }
 
 interface Campaign {
@@ -32,7 +32,7 @@ export function init(): TypedPocketBase {
 	return new PocketBase('https://scfvi.pockethost.io') as TypedPocketBase;
 }
 
-export async function getAllEntries(db: TypedPocketBase) {
-	const entries = await db.collection('entries').getFullList({ expand: 'campaign,type' });
+export async function getAllEntries(client: TypedPocketBase) {
+	const entries = await client.collection('entries').getFullList({ expand: 'campaign,type' });
 	return entries;
 }
