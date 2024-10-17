@@ -20,6 +20,15 @@
 
 	export let campaignSelection = entryCampaignSelection;
 	export let typeSelection = entryTypeSelection;
+
+	const youTubePrefix = 'https://youtube.com/watch?v=';
+	const tweetPrefix = 'https://x.com/';
+
+	const shouldShowTweet = () =>
+		['Artwork', 'Tweet'].includes(entry.expand['type'].name) && entry.link.startsWith(tweetPrefix);
+
+	const shouldShowYouTube = () =>
+		entry.expand['type'].name === 'Video' && entry.link.startsWith(youTubePrefix);
 </script>
 
 <Dialog.Root>
@@ -71,11 +80,11 @@
 			•
 			{entry.expand['type'].name}
 		</div>
-		{#if entry.expand['type'].name === 'Video'}
-			<YouTube youTubeId={entry.link.split('=')[1]} />
+		{#if shouldShowTweet()}
+			<Tweet tweetLink={entry.link.replace(tweetPrefix, '')} />
 		{/if}
-		{#if entry.expand['type'].name === 'Tweet'}
-			<Tweet tweetLink={entry.link.replace('https://x.com/', '')} />
+		{#if shouldShowYouTube()}
+			<YouTube youTubeId={entry.link.replace(youTubePrefix, '')} />
 		{/if}
 	</Dialog.Content>
 </Dialog.Root>
