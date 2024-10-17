@@ -2,6 +2,9 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Dialog from '$lib/components/ui/dialog';
 
+	import Tweet from '$lib/components/tweet.svelte';
+	import { YouTube } from 'sveltekit-embed';
+
 	import type { Entry } from '$lib/types';
 
 	export let entry: Entry;
@@ -61,15 +64,18 @@
 		</Card.Footer>
 	</Card.Root>
 	<Dialog.Content class="w-[350px]">
-		<Dialog.Header class="text-left">
-			<h2 class="text-xl font-bold">{entry.title}</h2>
-			<div class="text-lg">{entry.author}, {entry.year}</div>
-			<div>
-				<span class="font-bold">{entry.expand['campaign'].name}</span>
-				•
-				{entry.expand['type'].name}
-			</div>
-		</Dialog.Header>
-		<p>Content</p>
+		<h2 class="text-xl font-bold">{entry.title}</h2>
+		<div class="text-lg">{entry.author}, {entry.year}</div>
+		<div>
+			<span class="font-bold">{entry.expand['campaign'].name}</span>
+			•
+			{entry.expand['type'].name}
+		</div>
+		{#if entry.expand['type'].name === 'Video'}
+			<YouTube youTubeId={entry.link.split('=')[1]} />
+		{/if}
+		{#if entry.expand['type'].name === 'Tweet'}
+			<Tweet tweetLink={entry.link.replace('https://x.com/', '')} />
+		{/if}
 	</Dialog.Content>
 </Dialog.Root>
