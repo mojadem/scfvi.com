@@ -21,7 +21,7 @@
 	export let campaignSelection = entryCampaignSelection;
 	export let typeSelection = entryTypeSelection;
 
-	const youTubePrefix = 'https://youtube.com/watch?v=';
+	const youTubePrefix = 'https://www.youtube.com/watch?v=';
 	const tweetPrefix = 'https://x.com/';
 
 	const shouldShowTweet = () =>
