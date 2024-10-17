@@ -1,25 +1,5 @@
+import type { Campaign, Entry, Type } from '$lib/types';
 import PocketBase, { RecordService } from 'pocketbase';
-
-interface Entry {
-	id: string;
-	title: string;
-	author: string;
-	year: number;
-	link: string;
-	campaign: string;
-	type: string;
-	expand: Record<'campaign' | 'type', Campaign | Type>;
-}
-
-interface Campaign {
-	id: string;
-	name: string;
-}
-
-interface Type {
-	id: string;
-	name: string;
-}
 
 interface TypedPocketBase extends PocketBase {
 	collection(idOrName: string): RecordService;
@@ -33,6 +13,18 @@ export function init(): TypedPocketBase {
 }
 
 export async function getAllEntries(client: TypedPocketBase) {
-	const entries = await client.collection('entries').getFullList({ expand: 'campaign,type' });
-	return entries;
+	const entries = await client
+		.collection('entries')
+		.getFullList({ expand: 'campaign,type', sort: 'year,title' });
+	return entries.map((entry, index) => ({ ...entry, index }));
+}
+
+export async function getAllTypes(client: TypedPocketBase) {
+	const types = await client.collection('types').getFullList({ sort: 'name' });
+	return types;
+}
+
+export async function getAllCampaigns(client: TypedPocketBase) {
+	const campaigns = await client.collection('campaigns').getFullList({ sort: 'name' });
+	return campaigns;
 }

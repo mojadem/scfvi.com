@@ -55,7 +55,7 @@ const config: Config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Gabarito', ...fontFamily.sans]
+				display: ['Gabarito', ...fontFamily.sans]
 			}
 		}
 	}
