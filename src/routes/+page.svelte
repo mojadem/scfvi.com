@@ -65,7 +65,8 @@
 	<div class="grid grid-cols-1 gap-4 md:grid-cols-2" style="grid-template-rows: 1fr;">
 		{#each entriesToDisplay as entry, index}
 			{#if index === 1}
-				<div></div>
+				<!-- column stagger -->
+				<div class="hidden md:block"></div>
 			{/if}
 			<div class="row-span-2">
 				<EntryCard {entry} bind:campaignSelection bind:typeSelection />

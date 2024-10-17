@@ -60,8 +60,8 @@
 			<a href={entry.link} target="_blank" class="underline">Link</a>
 		</Card.Footer>
 	</Card.Root>
-	<Dialog.Content>
-		<Dialog.Header>
+	<Dialog.Content class="w-[350px]">
+		<Dialog.Header class="text-left">
 			<h2 class="text-xl font-bold">{entry.title}</h2>
 			<div class="text-lg">{entry.author}, {entry.year}</div>
 			<div>
