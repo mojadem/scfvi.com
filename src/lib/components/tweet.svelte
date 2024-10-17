@@ -41,10 +41,4 @@
 		margin: 0;
 		padding: 0;
 	}
-
-	.twitter-tweet a {
-		color: #000000;
-		font-weight: bold;
-		text-decoration: none;
-	}
 </style>
