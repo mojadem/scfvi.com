@@ -25,7 +25,9 @@
 
 <div class="tweet-wrapper">
 	<blockquote class="twitter-tweet" data-theme="dark">
-		<a href={`https://twitter.com/${tweetLink}`}>Loading Tweet...</a>
+		<a href={`https://twitter.com/${tweetLink} `} target="_blank" class="underline">
+			Loading Tweet...<br />Not loading? Click here to view.
+		</a>
 	</blockquote>
 </div>
 
