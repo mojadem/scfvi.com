@@ -69,7 +69,7 @@
 				<div class="hidden md:block"></div>
 			{/if}
 			<div class="row-span-2">
-				<EntryCard {entry} />
+				<EntryCard {entry} bind:campaignSelection bind:typeSelection />
 			</div>
 		{/each}
 	</div>
