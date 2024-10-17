@@ -7,31 +7,31 @@
 
 	export let data;
 
-	const allTypes = { value: 'all', label: 'All Content' };
 	const allCampaigns = { value: 'all', label: 'All Campaigns' };
+	const allTypes = { value: 'all', label: 'All Content' };
 
-	let typeSelection = allTypes;
 	let campaignSelection = allCampaigns;
+	let typeSelection = allTypes;
 
 	$: entriesToDisplay = data.entries
-		.filter((entry) => {
-			if (typeSelection.value === 'all') {
-				return true;
-			} else {
-				return entry.type === typeSelection.value;
-			}
-		})
 		.filter((entry) => {
 			if (campaignSelection.value === 'all') {
 				return true;
 			} else {
 				return entry.campaign === campaignSelection.value;
 			}
+		})
+		.filter((entry) => {
+			if (typeSelection.value === 'all') {
+				return true;
+			} else {
+				return entry.type === typeSelection.value;
+			}
 		});
 
 	function resetFilters() {
-		typeSelection = allTypes;
 		campaignSelection = allCampaigns;
+		typeSelection = allTypes;
 	}
 </script>
 
@@ -62,14 +62,16 @@
 		</div>
 	</header>
 
-	<div class="grid grid-cols-1 gap-2 md:grid-cols-2" style="grid-template-rows: 1fr;">
+	<div class="grid grid-cols-1 gap-4 md:grid-cols-2" style="grid-template-rows: 1fr;">
 		{#each entriesToDisplay as entry, index}
 			{#if index === 1}
 				<div></div>
 			{/if}
 			<div class="row-span-2">
-				<EntryCard {entry} />
+				<EntryCard {entry} bind:campaignSelection bind:typeSelection />
 			</div>
 		{/each}
 	</div>
+
+	<div class="my-4"></div>
 </div>

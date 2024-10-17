@@ -6,7 +6,17 @@
 
 	export let entry: Entry;
 
-	const maxTitleLength = 40;
+	const entryCampaignSelection = {
+		value: entry.expand['campaign'].id,
+		label: entry.expand['campaign'].name
+	};
+	const entryTypeSelection = {
+		value: entry.expand['type'].id,
+		label: entry.expand['type'].name
+	};
+
+	export let campaignSelection = entryCampaignSelection;
+	export let typeSelection = entryTypeSelection;
 </script>
 
 <Dialog.Root>
@@ -16,15 +26,29 @@
 				<span class="text-3xl font-bold">{entry.index + 1}</span>
 				<div class="mx-2"></div>
 				<div class="min-w-0">
-					<p class="truncate text-xl font-bold">
+					<h2 class="truncate text-xl font-bold">
 						{entry.title}
-					</p>
-					<p>{entry.author}</p>
-					<p>
-						<span class="font-bold">{entry.expand['campaign'].name}</span>
+					</h2>
+					<div class="text-lg">{entry.author}, {entry.year}</div>
+					<div>
+						<button
+							class="font-bold hover:underline"
+							on:click={() => {
+								campaignSelection = entryCampaignSelection;
+							}}
+						>
+							{entry.expand['campaign'].name}
+						</button>
 						•
-						<span>{entry.expand['type'].name}</span>
-					</p>
+						<button
+							class="hover:underline"
+							on:click={() => {
+								typeSelection = entryTypeSelection;
+							}}
+						>
+							{entry.expand['type'].name}
+						</button>
+					</div>
 				</div>
 			</div>
 		</Card.Content>
@@ -36,9 +60,15 @@
 			<a href={entry.link} target="_blank" class="underline">Link</a>
 		</Card.Footer>
 	</Card.Root>
-	<Dialog.Content class="sm:max-w-[425px]">
+	<Dialog.Content>
 		<Dialog.Header>
-			<p>Header</p>
+			<h2 class="text-xl font-bold">{entry.title}</h2>
+			<div class="text-lg">{entry.author}, {entry.year}</div>
+			<div>
+				<span class="font-bold">{entry.expand['campaign'].name}</span>
+				•
+				{entry.expand['type'].name}
+			</div>
 		</Dialog.Header>
 		<p>Content</p>
 	</Dialog.Content>
