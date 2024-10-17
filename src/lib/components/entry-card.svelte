@@ -5,18 +5,6 @@
 	import type { Entry } from '$lib/types';
 
 	export let entry: Entry;
-
-	const entryCampaignSelection = {
-		value: entry.expand['campaign'].id,
-		label: entry.expand['campaign'].name
-	};
-	const entryTypeSelection = {
-		value: entry.expand['type'].id,
-		label: entry.expand['type'].name
-	};
-
-	export let campaignSelection = entryCampaignSelection;
-	export let typeSelection = entryTypeSelection;
 </script>
 
 <Dialog.Root>
@@ -31,23 +19,9 @@
 					</h2>
 					<div class="text-lg">{entry.author}, {entry.year}</div>
 					<div>
-						<button
-							class="font-bold hover:underline"
-							on:click={() => {
-								campaignSelection = entryCampaignSelection;
-							}}
-						>
-							{entry.expand['campaign'].name}
-						</button>
+						<span class="font-bold">{entry.expand['campaign'].name}</span>
 						•
-						<button
-							class="hover:underline"
-							on:click={() => {
-								typeSelection = entryTypeSelection;
-							}}
-						>
-							{entry.expand['type'].name}
-						</button>
+						<span>{entry.expand['type'].name}</span>
 					</div>
 				</div>
 			</div>
