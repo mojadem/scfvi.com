@@ -128,5 +128,10 @@
 		</Pagination.Root>
 	{/if}
 
+	<div class="my-2"></div>
+	<div class="flex justify-center">
+		<button class="text-sm underline" on:click={scrollToTop}>Back to top</button>
+	</div>
+
 	<div class="my-4"></div>
 </div>
