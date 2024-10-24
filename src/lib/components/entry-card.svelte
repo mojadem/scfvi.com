@@ -64,7 +64,7 @@
 				</div>
 			</div>
 		</Card.Content>
-		<Card.Footer>
+		<Card.Footer class="flex justify-evenly">
 			<Dialog.Trigger>
 				<span class="underline">View</span>
 			</Dialog.Trigger>
