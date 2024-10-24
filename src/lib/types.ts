@@ -6,6 +6,7 @@ export interface Entry {
 	link: string;
 	campaign: string;
 	type: string;
+	description: string;
 	index: number;
 	expand: Record<'campaign' | 'type', Campaign | Type>;
 }

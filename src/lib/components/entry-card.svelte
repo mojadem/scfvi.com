@@ -80,6 +80,7 @@
 			•
 			{entry.expand['type'].name}
 		</div>
+		{@html entry.description}
 		{#if shouldShowTweet()}
 			<Tweet tweetLink={entry.link.replace(tweetPrefix, '')} />
 		{/if}
