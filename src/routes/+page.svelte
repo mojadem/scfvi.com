@@ -81,7 +81,7 @@
 		</div>
 	</header>
 
-	<p>{filteredEntries.length} results found</p>
+	<p>{filteredEntries.length} result{filteredEntries.length === 1 ? '' : 's'} found</p>
 	<div class="my-2"></div>
 
 	{#if filteredEntries.length > 0}
