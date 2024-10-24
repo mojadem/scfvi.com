@@ -1,19 +1,39 @@
 <script lang="ts">
-	import * as Card from '$lib/components/ui/card/index.js';
-	import { Badge } from '$lib/components/ui/badge/index.js';
+	import * as Pagination from '$lib/components/ui/pagination';
 	import { Button } from '$lib/components/ui/button/index.js';
 	import FilterSelection from '$lib/components/filter-selection.svelte';
 	import EntryCard from '$lib/components/entry-card.svelte';
+	import { browser } from '$app/environment';
 
 	export let data;
 
 	const allCampaigns = { value: 'all', label: 'All Campaigns' };
 	const allTypes = { value: 'all', label: 'All Content' };
+	const pageSize = 20;
 
 	let campaignSelection = allCampaigns;
 	let typeSelection = allTypes;
+	let currentPage = 1;
 
-	$: entriesToDisplay = data.entries
+	function resetFilters() {
+		campaignSelection = allCampaigns;
+		typeSelection = allTypes;
+	}
+
+	function scrollToTop() {
+		if (browser) {
+			window.scrollTo(0, 0);
+		}
+	}
+
+	function resetPage() {
+		currentPage = 1;
+	}
+
+	$: campaignSelection.value, resetPage();
+	$: typeSelection.value, resetPage();
+
+	$: filteredEntries = data.entries
 		.filter((entry) => {
 			if (campaignSelection.value === 'all') {
 				return true;
@@ -29,10 +49,9 @@
 			}
 		});
 
-	function resetFilters() {
-		campaignSelection = allCampaigns;
-		typeSelection = allTypes;
-	}
+	$: pageEntries = filteredEntries.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+	$: currentPage, scrollToTop();
 </script>
 
 <div class="container mx-auto">
@@ -62,17 +81,52 @@
 		</div>
 	</header>
 
-	<div class="grid grid-cols-1 gap-4 md:grid-cols-2" style="grid-template-rows: 1fr;">
-		{#each entriesToDisplay as entry, index}
-			{#if index === 1}
-				<!-- column stagger -->
-				<div class="hidden md:block"></div>
-			{/if}
-			<div class="row-span-2">
-				<EntryCard {entry} bind:campaignSelection bind:typeSelection />
+	<p>{filteredEntries.length} results found</p>
+	<div class="my-2"></div>
+
+	{#if filteredEntries.length > 0}
+		<Pagination.Root
+			count={filteredEntries.length}
+			perPage={pageSize}
+			bind:page={currentPage}
+			let:pages
+		>
+			<div class="grid grid-cols-1 gap-4 md:grid-cols-2" style="grid-template-rows: 1fr;">
+				{#each pageEntries as entry, index}
+					{#if index === 1}
+						<!-- column stagger -->
+						<div class="hidden md:block"></div>
+					{/if}
+					<div class="row-span-2">
+						<EntryCard {entry} bind:campaignSelection bind:typeSelection />
+					</div>
+				{/each}
 			</div>
-		{/each}
-	</div>
+			<div class="my-2"></div>
+
+			<Pagination.Content>
+				<Pagination.Item>
+					<Pagination.PrevButton />
+				</Pagination.Item>
+				{#each pages as page (page.key)}
+					{#if page.type === 'ellipsis'}
+						<Pagination.Item>
+							<Pagination.Ellipsis />
+						</Pagination.Item>
+					{:else}
+						<Pagination.Item isVisible={currentPage == page.value}>
+							<Pagination.Link {page} isActive={currentPage == page.value}>
+								{page.value}
+							</Pagination.Link>
+						</Pagination.Item>
+					{/if}
+				{/each}
+				<Pagination.Item>
+					<Pagination.NextButton />
+				</Pagination.Item>
+			</Pagination.Content>
+		</Pagination.Root>
+	{/if}
 
 	<div class="my-4"></div>
 </div>
