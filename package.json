@@ -37,6 +37,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource-variable/overpass-mono": "^5.1.0",
 		"@fontsource/gabarito": "^5.1.0",
 		"clsx": "^2.1.1",
 		"pocketbase": "^0.21.5",

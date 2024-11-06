@@ -55,7 +55,8 @@ const config: Config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				display: ['Gabarito', ...fontFamily.sans]
+				display: ['Gabarito', ...fontFamily.sans],
+				mono: ['Overpass Mono Variable', ...fontFamily.mono]
 			}
 		}
 	}
