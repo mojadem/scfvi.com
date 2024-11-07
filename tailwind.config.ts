@@ -13,6 +13,9 @@ const config: Config = {
 				'2xl': '1400px'
 			}
 		},
+		colors: {
+			'bright-green': '#00ff00'
+		},
 		extend: {
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',

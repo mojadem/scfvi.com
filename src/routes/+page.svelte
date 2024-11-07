@@ -6,9 +6,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import FilterSelection from '$lib/components/filter-selection.svelte';
 	import EntryCard from '$lib/components/entry-card.svelte';
-	import { Filter } from 'lucide-svelte';
 	import { browser } from '$app/environment';
-	import { onMount } from 'svelte';
 
 	export let data;
 
@@ -27,11 +25,12 @@
 
 	const pageSize = 20;
 	let currentPage = 1;
-	let isPageScrollable = true;
 
 	function resetFilters() {
 		campaignSelection = allCampaigns;
 		typeSelection = allTypes;
+		searchSelection = defaultSearchSelection;
+		searchString = '';
 	}
 
 	function scrollToTop() {
@@ -75,28 +74,6 @@
 	$: pageEntries = filteredEntries.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
 	$: currentPage, scrollToTop();
-
-	// TODO: this sometimes refreshes sometimes doesn't, opening and closing the sheet has some effect
-
-	$: pageEntries,
-		(isPageScrollable = browser
-			? document.documentElement.scrollHeight > document.documentElement.clientHeight
-			: true);
-
-	onMount(() => {
-		const checkScrollable = () => {
-			isPageScrollable =
-				document.documentElement.scrollHeight > document.documentElement.clientHeight;
-		};
-
-		window.addEventListener('resize', checkScrollable);
-
-		checkScrollable();
-
-		return () => {
-			window.removeEventListener('resize', checkScrollable);
-		};
-	});
 </script>
 
 <div class="container mx-auto">
@@ -104,62 +81,81 @@
 		<h1 class="scroll-m-20 font-display text-4xl font-extrabold tracking-tight lg:text-5xl">
 			SAUDI CYBERFEMINISM VISUAL INDEX
 		</h1>
-		<div class="my-2"></div>
-		<div class="flex">
-			<Input bind:value={searchString} placeholder={`Search by ${searchSelection}...`} />
-			<div class="mx-2" />
-			<Sheet.Root>
-				<Sheet.Trigger>
-					<Button class="aspect-square" variant="ghost">
-						<Filter size="32" />
-					</Button>
-				</Sheet.Trigger>
-				<Sheet.Content>
-					<Sheet.Header>
-						<Sheet.Title>Filter Entries</Sheet.Title>
-					</Sheet.Header>
-					<div class="my-2" />
-					<div class="grid w-full grid-cols-1 gap-2">
-						<FilterSelection
-							defaultSelection={allCampaigns}
-							bind:selected={campaignSelection}
-							items={data.campaigns}
-						/>
-
-						<FilterSelection
-							defaultSelection={allTypes}
-							bind:selected={typeSelection}
-							items={data.types}
-						/>
-
-						<Select.Root
-							onSelectedChange={(selection) => {
-								if (selection === undefined) {
-									return;
-								}
-
-								searchSelection = selection.value;
-							}}
-							selected={{ value: searchSelection, label: `Search by ${searchSelection}` }}
-						>
-							<Select.Trigger>
-								<Select.Value />
-							</Select.Trigger>
-							<Select.Content>
-								{#each searchableFields as field}
-									<Select.Item value={field}>{`Search by ${field}`}</Select.Item>
-								{/each}
-							</Select.Content>
-						</Select.Root>
-
-						<Button on:click={resetFilters}>Reset</Button>
-					</div>
-				</Sheet.Content>
-			</Sheet.Root>
-		</div>
 	</header>
 
-	<p>{filteredEntries.length} result{filteredEntries.length === 1 ? '' : 's'} found</p>
+	<div class="flex">
+		<Input bind:value={searchString} placeholder={`Search by ${searchSelection}...`} />
+		<div class="mx-2" />
+		<Sheet.Root>
+			<Sheet.Trigger>
+				<Button>filters</Button>
+			</Sheet.Trigger>
+			<Sheet.Content>
+				<Sheet.Header>
+					<Sheet.Title>Filter Entries</Sheet.Title>
+				</Sheet.Header>
+				<div class="my-2" />
+				<div class="grid w-full grid-cols-1 gap-2">
+					<FilterSelection
+						defaultSelection={allCampaigns}
+						bind:selected={campaignSelection}
+						items={data.campaigns}
+					/>
+
+					<FilterSelection
+						defaultSelection={allTypes}
+						bind:selected={typeSelection}
+						items={data.types}
+					/>
+
+					<Select.Root
+						onSelectedChange={(selection) => {
+							if (selection === undefined) {
+								return;
+							}
+
+							searchSelection = selection.value;
+						}}
+						selected={{ value: searchSelection, label: `Search by ${searchSelection}` }}
+					>
+						<Select.Trigger>
+							<Select.Value />
+						</Select.Trigger>
+						<Select.Content>
+							{#each searchableFields as field}
+								<Select.Item value={field}>{`Search by ${field}`}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
+
+					<Button on:click={resetFilters}>reset</Button>
+				</div>
+			</Sheet.Content>
+		</Sheet.Root>
+	</div>
+	<div class="my-2"></div>
+
+	<div>
+		<span>{filteredEntries.length} result{filteredEntries.length === 1 ? '' : 's'} found</span>
+		{#if campaignSelection.value !== 'all'}
+			<button
+				class="font-bold hover:line-through"
+				on:click={() => {
+					campaignSelection = allCampaigns;
+				}}
+				>{campaignSelection.label}
+			</button>
+		{/if}
+		{#if typeSelection.value !== 'all'}
+			<button
+				class="font-bold hover:line-through"
+				on:click={() => {
+					typeSelection = allTypes;
+				}}
+				>{typeSelection.label}
+			</button>
+		{/if}
+	</div>
 	<div class="my-2"></div>
 
 	{#if filteredEntries.length > 0}
@@ -207,12 +203,10 @@
 			</Pagination.Root>
 		{/if}
 
-		{#if isPageScrollable}
-			<div class="my-2"></div>
-			<div class="flex justify-center">
-				<button class="text-sm underline" on:click={scrollToTop}>Back to top</button>
-			</div>
-		{/if}
+		<div class="my-2"></div>
+		<div class="flex justify-center">
+			<button class="text-sm underline" on:click={scrollToTop}>Back to top</button>
+		</div>
 
 		<div class="my-4"></div>
 	{/if}
