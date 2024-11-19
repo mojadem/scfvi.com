@@ -54,3 +54,20 @@ export const flyAndScale = (
 		easing: cubicOut
 	};
 };
+
+export function labelForFilterSelection(item: { name: string }) {
+	switch (item.name) {
+		case 'Article':
+			return 'Articles';
+		case 'Blog':
+			return 'Blogs';
+		case 'Book':
+			return 'Books';
+		case 'Tweet':
+			return 'Tweets';
+		case 'Video':
+			return 'Videos';
+		default:
+			return item.name;
+	}
+}
