@@ -1,6 +1,5 @@
 <script lang="ts">
 	import * as Sheet from '$lib/components/ui/sheet';
-	import * as Select from '$lib/components/ui/select';
 	import * as Pagination from '$lib/components/ui/pagination';
 	import { Input } from '$lib/components/ui/input';
 	import { Button } from '$lib/components/ui/button/index.js';
@@ -10,16 +9,11 @@
 
 	export let data;
 
-	const searchableFields = ['title', 'author'];
-
 	const allCampaigns = { value: 'all', label: 'All Campaigns' };
 	const allTypes = { value: 'all', label: 'All Content' };
 
-	const defaultSearchSelection = 'title';
-
 	let campaignSelection = allCampaigns;
 	let typeSelection = allTypes;
-	let searchSelection = defaultSearchSelection;
 
 	let searchString = '';
 
@@ -29,7 +23,6 @@
 	function resetFilters() {
 		campaignSelection = allCampaigns;
 		typeSelection = allTypes;
-		searchSelection = defaultSearchSelection;
 		searchString = '';
 	}
 
@@ -64,11 +57,10 @@
 			}
 		})
 		.filter((entry) => {
-			if (searchSelection === 'title') {
-				return entry.title.toLowerCase().includes(searchString.toLowerCase());
-			} else if (searchSelection === 'author') {
-				return entry.author.toLowerCase().includes(searchString.toLowerCase());
-			}
+			return (
+				entry.title.toLowerCase().includes(searchString.toLowerCase()) ||
+				entry.author.toLowerCase().includes(searchString.toLowerCase())
+			);
 		});
 
 	$: pageEntries = filteredEntries.slice((currentPage - 1) * pageSize, currentPage * pageSize);
@@ -78,7 +70,7 @@
 
 <div>
 	<div class="flex">
-		<Input bind:value={searchString} placeholder={`Search by ${searchSelection}...`} />
+		<Input bind:value={searchString} placeholder={`Search entries...`} />
 		<div class="mx-2" />
 		<Sheet.Root>
 			<Sheet.Trigger>
@@ -101,26 +93,6 @@
 						bind:selected={typeSelection}
 						items={data.types}
 					/>
-
-					<Select.Root
-						onSelectedChange={(selection) => {
-							if (selection === undefined) {
-								return;
-							}
-
-							searchSelection = selection.value;
-						}}
-						selected={{ value: searchSelection, label: `Search by ${searchSelection}` }}
-					>
-						<Select.Trigger>
-							<Select.Value />
-						</Select.Trigger>
-						<Select.Content>
-							{#each searchableFields as field}
-								<Select.Item value={field}>{`Search by ${field}`}</Select.Item>
-							{/each}
-						</Select.Content>
-					</Select.Root>
 
 					<Button on:click={resetFilters}>reset</Button>
 				</div>
@@ -199,7 +171,7 @@
 
 		<div class="my-2"></div>
 		<div class="flex justify-center">
-			<button class="text-sm underline" on:click={scrollToTop}>Back to top</button>
+			<button class="text-sm underline" on:click={scrollToTop}>back to top</button>
 		</div>
 
 		<div class="my-4"></div>
