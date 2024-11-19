@@ -53,7 +53,7 @@
 		<Dialog.Root>
 			<Dialog.Trigger class="grow bg-primary p-2 text-center text-bright-green">view</Dialog.Trigger
 			>
-			<Dialog.Content class="max-h-screen w-[350px] overflow-y-scroll">
+			<Dialog.Content class="max-h-screen w-[350px] overflow-y-auto">
 				<EntryCardDetails {entry} />
 			</Dialog.Content>
 		</Dialog.Root>
