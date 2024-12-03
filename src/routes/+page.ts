@@ -1,4 +1,4 @@
-import * as db from '$lib/server/database';
+import * as db from '$lib/database';
 
 export const load = async () => {
 	const client = db.init();
