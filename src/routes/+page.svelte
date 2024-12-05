@@ -171,9 +171,7 @@
 
 		<div class="my-2"></div>
 		<div class="flex justify-center">
-			<button class="text-sm underline" on:click={scrollToTop}>back to top</button>
+			<button class="hover:underline" on:click={scrollToTop}>back to top</button>
 		</div>
-
-		<div class="my-4"></div>
 	{/if}
 </div>
