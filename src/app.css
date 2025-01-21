@@ -4,22 +4,29 @@
 
 @layer base {
 	:root {
-		--background: 0 0% 100%;
-		--foreground: 222.2 84% 4.9%;
-		--muted: 210 40% 96.1%;
-		--muted-foreground: 215.4 16.3% 46.9%;
-		--popover: 0 0% 100%;
-		--popover-foreground: 222.2 84% 4.9%;
-		--card: 0 0% 100%;
-		--card-foreground: 222.2 84% 4.9%;
-		--border: 214.3 31.8% 91.4%;
-		--input: 214.3 31.8% 91.4%;
-		--primary: 222.2 47.4% 11.2%;
-		--primary-foreground: 210 40% 98%;
-		--secondary: 210 40% 96.1%;
-		--secondary-foreground: 222.2 47.4% 11.2%;
-		--accent: 210 40% 96.1%;
-		--accent-foreground: 222.2 47.4% 11.2%;
+		--fuschia: 292 100% 66%;
+		--black: 0 0% 0%;
+		--black-light: 0 0% 9%;
+		--fuschia-dark: 292 100% 60%;
+
+		--background: var(--fuschia);
+		--foreground: var(--black);
+		--muted: var(--fuschia-dark);
+		--muted-foreground: var(--black);
+		--popover: var(--fuschia);
+		--popover-foreground: var(--black);
+		--card: var(--fuschia);
+		--card-foreground: var(--black);
+		--border: var(--black);
+		--input: var(--black);
+		--primary: var(--black);
+		--primary-foreground: var(--fuschia);
+		--secondary: var(--black);
+		--secondary-foreground: var(--black-light);
+		--accent: var(--fuschia-dark);
+		--accent-foreground: var(--black-light);
+
+		/* TODO: the following colors may need updated in the future */
 		--destructive: 0 72.2% 50.6%;
 		--destructive-foreground: 210 40% 98%;
 		--ring: 222.2 84% 4.9%;
