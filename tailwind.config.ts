@@ -67,7 +67,8 @@ const config: Config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				display: ['Gabarito', ...fontFamily.sans],
+				mono: ['Overpass Mono Variable', ...fontFamily.mono]
 			},
 			keyframes: {
 				'accordion-down': {

@@ -7,6 +7,13 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@fontsource-variable/gabarito':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@fontsource-variable/overpass-mono':
+        specifier: ^5.1.1
+        version: 5.1.1
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5
@@ -608,6 +615,12 @@ packages:
   '@fastify/busboy@2.1.1':
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
+
+  '@fontsource-variable/gabarito@5.1.1':
+    resolution: {integrity: sha512-qiVssXMWQMu7pS5N4DaCCN9wlzvRgHJonjPU88kSE90Xmt+Ir9DPV6acA0/A6SpXGsf2uR5yjwDdyyLoBMCsDA==}
+
+  '@fontsource-variable/overpass-mono@5.1.1':
+    resolution: {integrity: sha512-3vKlISp2aEoB+2qiCNVuaNOkzQEPrbCR2UEOP2Cs7CJyHLwfBZmOJvH6p66LnCs9/MuE64t0K1uqTPHnM/zEjA==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2321,6 +2334,10 @@ snapshots:
       levn: 0.4.1
 
   '@fastify/busboy@2.1.1': {}
+
+  '@fontsource-variable/gabarito@5.1.1': {}
+
+  '@fontsource-variable/overpass-mono@5.1.1': {}
 
   '@humanfs/core@0.19.1': {}
 
