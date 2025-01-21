@@ -18,7 +18,6 @@
 		"@sveltejs/adapter-cloudflare": "^4.8.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
-		"@tailwindcss/typography": "^0.5.16",
 		"autoprefixer": "^10.4.20",
 		"clsx": "^2.1.1",
 		"eslint": "^9.18.0",
@@ -39,7 +38,7 @@
 		"vite": "^5.4.11"
 	},
 	"dependencies": {
-		"@fontsource-variable/gabarito": "^5.1.1",
-		"@fontsource-variable/overpass-mono": "^5.1.1"
+		"@fontsource-variable/overpass-mono": "^5.1.1",
+		"@fontsource/gabarito": "^5.1.1"
 	}
 }
