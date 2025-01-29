@@ -6,5 +6,5 @@
 	<header class="py-4">
 		<img src={logo} alt="SCFVI logo" class="w-32" />
 	</header>
-	<p>This site is under construction...</p>
+	<p>this site is under construction...</p>
 </main>
