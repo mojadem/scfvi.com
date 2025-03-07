@@ -14,19 +14,19 @@ func main() {
 
 	app.OnRecordCreate("entries").BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordCreate triggered", "id", e.Record.Id)
-		deploy(app)
+		deployFrontend(app)
 		return e.Next()
 	})
 
 	app.OnRecordUpdate("entries").BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordUpdate triggered", "id", e.Record.Id)
-		deploy(app)
+		deployFrontend(app)
 		return e.Next()
 	})
 
 	app.OnRecordDelete("entries").BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordDelete triggered", "id", e.Record.Id)
-		deploy(app)
+		deployFrontend(app)
 		return e.Next()
 	})
 
@@ -35,11 +35,10 @@ func main() {
 	}
 }
 
-func deploy(app *pocketbase.PocketBase) {
-	url := os.Getenv("DEPLOY_HOOK_URL")
-
+func deployFrontend(app *pocketbase.PocketBase) {
+	url := os.Getenv("FRONTEND_DEPLOY_HOOK_URL")
 	if url == "" {
-		app.Logger().Error("DEPLOY_HOOK_URL not set")
+		app.Logger().Error("deploy hook env var not set")
 		return
 	}
 
