@@ -1,0 +1,33 @@
+name: Build and deploy server
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "server/**"
+
+env:
+  CONTEXT: server/
+  IMAGE_NAME: mojadem/scfvi-server
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Build and deploy Docker image
+        uses: ./.github/actions/build-and-push-image
+        with:
+          context: ${{ env.CONTEXT }}
+          image-name: ${{ env.IMAGE_NAME }}
+      - name: Deploy to Coolify
+        shell: bash
+        env:
+          COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
+          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
+        run: |
+          curl "$COOLIFY_WEBHOOK" --header "Authorization: Bearer $COOLIFY_TOKEN" --header 'Content-Type: application/json'
