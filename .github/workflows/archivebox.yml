@@ -19,6 +19,7 @@ jobs:
       attestations: write
       id-token: write
     steps:
+      - uses: actions/checkout@v4
       - name: Build and deploy Docker image
         uses: ./.github/actions/build-and-push-image
         with:
