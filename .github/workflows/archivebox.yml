@@ -1,0 +1,26 @@
+name: Build and deploy server
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "archivebox/**"
+
+env:
+  CONTEXT: archivebox/
+  IMAGE_NAME: mojadem/scfvi-archivebox
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    steps:
+      - name: Build and deploy Docker image
+        uses: ./.github/actions/build-and-push-image
+        with:
+          context: ${{ env.CONTEXT }}
+          image-name: ${{ env.IMAGE_NAME }}
