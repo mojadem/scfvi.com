@@ -7,6 +7,9 @@ inputs:
   image_name:
     description: name of the image
     required: true
+  github_token:
+    description: GITHUB_TOKEN secret
+    required: true
 
 env:
   REGISTRY: ghcr.io
@@ -21,7 +24,7 @@ runs:
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github_token }}
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7

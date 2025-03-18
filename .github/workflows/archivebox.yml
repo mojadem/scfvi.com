@@ -27,3 +27,4 @@ jobs:
         with:
           context: ${{ env.CONTEXT }}
           image_name: ${{ env.IMAGE_NAME }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
