@@ -22,16 +22,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build and deploy Docker image
-        uses: ./.github/actions/build-and-push-image
+        uses: ./.github/actions/build-and-deploy
         with:
           context: ${{ env.CONTEXT }}
           image_name: ${{ env.IMAGE_NAME }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Deploy to Coolify
-        shell: bash
-        env:
-          COOLIFY_WEBHOOK: ${{ secrets.COOLIFY_WEBHOOK }}
-          COOLIFY_TOKEN: ${{ secrets.COOLIFY_TOKEN }}
-        run: |
-          curl "$COOLIFY_WEBHOOK" --header "Authorization: Bearer $COOLIFY_TOKEN" --header 'Content-Type: application/json'
+          coolify_webhook: ${{ secrets.COOLIFY_SERVER_WEBHOOK }}
+          coolify_token: ${{ secrets.COOLIFY_TOKEN }}

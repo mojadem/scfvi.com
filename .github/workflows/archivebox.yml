@@ -22,9 +22,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Build and deploy Docker image
-        uses: ./.github/actions/build-and-push-image
+        uses: ./.github/actions/build-and-deploy
         with:
           context: ${{ env.CONTEXT }}
           image_name: ${{ env.IMAGE_NAME }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          coolify_webhook: ${{ secrets.COOLIFY_ARCHIVEBOX_WEBHOOK }}
+          coolify_token: ${{ secrets.COOLIFY_TOKEN }}

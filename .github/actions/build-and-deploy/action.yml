@@ -17,6 +17,12 @@ inputs:
   password:
     description: registry password
     required: true
+  coolify_webhook:
+    description: coolify deploy webhook
+    required: true
+  coolify_token:
+    description: coolify auth token
+    required: true
 
 runs:
   using: composite
@@ -42,3 +48,10 @@ runs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+    - name: Deploy to Coolify
+      shell: bash
+      env:
+        COOLIFY_WEBHOOK: ${{ inputs.coolify_webhook }}
+        COOLIFY_TOKEN: ${{ inputs.coolify_token }}
+      run: |
+        curl "$COOLIFY_WEBHOOK" --header "Authorization: Bearer $COOLIFY_TOKEN" --header 'Content-Type: application/json'
