@@ -51,14 +51,29 @@
 	</Card.Content>
 	<Card.Footer class="flex p-4">
 		<Dialog.Root>
-			<Dialog.Trigger class="grow bg-primary p-2 text-center text-bright-green">view</Dialog.Trigger
-			>
+			<Dialog.Trigger class="flex-1 bg-primary p-2 text-center text-bright-green">
+				view
+			</Dialog.Trigger>
 			<Dialog.Content class="max-h-screen w-[350px] overflow-y-auto">
 				<EntryCardDetails {entry} />
 			</Dialog.Content>
 		</Dialog.Root>
 		<div class="mx-2" />
-		<a class="grow bg-primary p-2 text-center text-bright-green" href={entry.link} target="_blank">
+		{#if entry.archivebox_id !== ''}
+			<a
+				class="flex-1 bg-primary p-2 text-center text-bright-green"
+				href={`https://archive.scfvi.com/archive/${entry.archivebox_id}/index.html`}
+				target="_blank"
+			>
+				archive
+			</a>
+		{/if}
+		<div class="mx-2" />
+		<a
+			class="flex-1 bg-primary p-2 text-center text-bright-green"
+			href={entry.link}
+			target="_blank"
+		>
 			link
 		</a>
 	</Card.Footer>
