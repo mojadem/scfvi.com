@@ -9,50 +9,96 @@
 	:root {
 		--fuschia: 292 100% 66%;
 		--black: 0 0% 0%;
-		--black-light: 0 0% 9%;
+
 		--fuschia-dark: 292 100% 60%;
 
 		--background: var(--fuschia);
 		--foreground: var(--black);
+		/* --background: 0 0% 100%; */
+		/* --foreground: 0 0% 3.9%; */
+
 		--muted: var(--fuschia-dark);
 		--muted-foreground: var(--black);
+		/* --muted: 0 0% 96.1%; */
+		/* --muted-foreground: 0 0% 45.1%; */
+
 		--popover: var(--fuschia);
 		--popover-foreground: var(--black);
+		/* --popover: 0 0% 100%; */
+		/* --popover-foreground: 0 0% 3.9%; */
+
 		--card: var(--fuschia);
 		--card-foreground: var(--black);
+		/* --card: 0 0% 100%; */
+		/* --card-foreground: 0 0% 3.9%; */
+
 		--border: var(--black);
 		--input: var(--black);
+		/* --border: 0 0% 89.8%; */
+		/* --input: 0 0% 89.8%; */
+
 		--primary: var(--black);
 		--primary-foreground: var(--fuschia);
-		--secondary: var(--black);
-		--secondary-foreground: var(--black-light);
-		--accent: var(--fuschia-dark);
-		--accent-foreground: var(--black-light);
+		/* --primary: 0 0% 9%; */
+		/* --primary-foreground: 0 0% 98%; */
 
-		/* TODO: the following colors may need updated in the future */
+		--secondary: var(--black);
+		--secondary-foreground: 0 0% 9%;
+		/* --secondary: 0 0% 96.1%; */
+		/* --secondary-foreground: 0 0% 9%; */
+
+		--accent: var(--fuschia-dark);
+		--accent-foreground: 0 0% 9%;
+
 		--destructive: 0 72.2% 50.6%;
-		--destructive-foreground: 210 40% 98%;
-		--ring: 222.2 84% 4.9%;
-		--radius: 0.5rem;
-		--sidebar-background: 0 0% 98%;
-		--sidebar-foreground: 240 5.3% 26.1%;
-		--sidebar-primary: 240 5.9% 10%;
-		--sidebar-primary-foreground: 0 0% 98%;
-		--sidebar-accent: 240 4.8% 95.9%;
-		--sidebar-accent-foreground: 240 5.9% 10%;
-		--sidebar-border: 220 13% 91%;
-		--sidebar-ring: 217.2 91.2% 59.8%;
+		--destructive-foreground: 0 0% 98%;
+
+		--ring: 0 0% 3.9%;
+
+		--radius: 0rem;
+	}
+
+	.dark {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+
+		--ring: 0 0% 83.1%;
 	}
 }
 
 @layer base {
 	* {
-		@apply border-border;
+		scrollbar-color: #00ff00 #000000;
+		scrollbar-width: thin;
 	}
 	body {
 		@apply bg-background text-foreground;
-
 		@apply font-mono;
+
 		font-feature-settings: 'liga' 0;
 	}
 }
