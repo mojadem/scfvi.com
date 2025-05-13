@@ -1,0 +1,35 @@
+:root {
+  --lavender: #a68ec5;
+  --black: #000000;
+  --green: #00ff00;
+}
+
+:root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--lavender);
+  color: var(--black);
+  font-family: "Overpass Mono", monospace;
+}
+
+main {
+  max-width: 1024px;
+  margin: auto;
+}
+
+h1,
+h2 {
+  font-family: "Gabarito", sans-serif;
+  font-weight: 900;
+}
+
+a {
+  color: var(--black);
+}
+
+.bold {
+  font-weight: bold;
+}

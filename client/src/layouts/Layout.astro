@@ -1,0 +1,34 @@
+---
+import "../styles/global.css";
+
+import "@fontsource-variable/gabarito";
+import "@fontsource-variable/overpass-mono";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>SCFVI</title>
+  </head>
+  <body>
+    <main>
+      <h1><a href="/">SCFVI</a></h1>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  h1 a {
+    color: black;
+    text-decoration: none;
+  }
+
+  h1 a:hover {
+    text-decoration: underline;
+  }
+</style>
