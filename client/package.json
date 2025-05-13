@@ -9,9 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/gabarito": "^5.2.5",
+    "@fontsource-variable/overpass-mono": "^5.2.5",
     "astro": "^5.7.12"
   },
   "devDependencies": {
+    "@astrojs/language-server": "^2.15.4",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1"
   }
