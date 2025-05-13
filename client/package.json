@@ -11,7 +11,8 @@
   "dependencies": {
     "@fontsource-variable/gabarito": "^5.2.5",
     "@fontsource-variable/overpass-mono": "^5.2.5",
-    "astro": "^5.7.12"
+    "astro": "^5.7.12",
+    "pocketbase": "^0.26.0"
   },
   "devDependencies": {
     "@astrojs/language-server": "^2.15.4",
