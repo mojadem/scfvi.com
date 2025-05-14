@@ -29,6 +29,24 @@ a {
   color: var(--black);
 }
 
+summary {
+  cursor: pointer;
+}
+
+a:hover,
+summary:hover {
+  color: var(--green);
+}
+
 .bold {
   font-weight: bold;
+}
+
+.flex-pad-gap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-pad-gap > * {
+  width: 100%;
 }
