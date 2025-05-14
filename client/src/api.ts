@@ -9,9 +9,13 @@ interface TypedPocketBase extends PocketBase {
 }
 
 const PB_URL = import.meta.env.PUBLIC_PB_URL;
-const pb = new PocketBase(PB_URL) as TypedPocketBase;
+
+function init() {
+  return new PocketBase(PB_URL) as TypedPocketBase;
+}
 
 export async function getAllEntries() {
+  const pb = init();
   const entries = await pb.collection("entries").getFullList({
     expand: "campaign,type",
     sort: "year,title",
@@ -21,9 +25,11 @@ export async function getAllEntries() {
 }
 
 export async function getAllCampaigns() {
+  const pb = init();
   return await pb.collection("campaigns").getFullList({ sort: "name" });
 }
 
 export async function getAllTypes() {
+  const pb = init();
   return await pb.collection("types").getFullList({ sort: "name" });
 }
