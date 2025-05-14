@@ -12,7 +12,9 @@
 body {
   background-color: var(--lavender);
   color: var(--black);
-  font-family: "Overpass Mono", monospace;
+
+  font-family: "Overpass Mono Variable", monospace;
+  font-feature-settings: "liga" 0;
 
   max-width: 64rem;
   margin: auto;
@@ -21,8 +23,8 @@ body {
 
 h1,
 h2 {
-  font-family: "Gabarito", sans-serif;
-  font-weight: 900;
+  font-family: "Gabarito Variable", system-ui, sans-serif;
+  font-weight: 700;
 }
 
 a {
