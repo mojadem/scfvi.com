@@ -1,0 +1,61 @@
+---
+import { ARCHIVEBOX_URL, PB_URL } from "../env";
+import type { Entry } from "../types";
+import { Tweet, YouTube } from "astro-embed";
+
+interface Props {
+  entry: Entry;
+}
+
+const { entry } = Astro.props as Props;
+
+const youTubePrefix = "https://www.youtube.com/watch?v=";
+const tweetPrefix = "https://x.com/";
+
+const shouldShowTweet =
+  ["Art", "Tweet"].includes(entry.expand.type.name) &&
+  entry.link.startsWith(tweetPrefix);
+
+const shouldShowYouTube =
+  entry.expand["type"].name === "Video" && entry.link.startsWith(youTubePrefix);
+
+function formatMediaLink(file: string) {
+  return `${PB_URL}/api/files/entries/${entry.id}/${file}`;
+}
+---
+
+<details>
+  <summary>details</summary>
+  <p>
+    {shouldShowTweet && <Tweet id={entry.link} theme="dark" />}
+    {shouldShowYouTube && <YouTube id={entry.link} />}
+    {entry.media.map((file) => <img src={formatMediaLink(file)} />)}
+  </p>
+  <p>
+    <Fragment set:html={entry.description} />
+  </p>
+  <p>
+    <a href={entry.link} target="_blank">link</a>
+    {
+      entry.archivebox_id != "" && (
+        <a
+          href={`${ARCHIVEBOX_URL}/archive/${entry.archivebox_id}`}
+          target="_blank"
+        >
+          archive
+          <a />
+        </a>
+      )
+    }
+  </p>
+
+  <style>
+    details {
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+    }
+  </style>
+</details>

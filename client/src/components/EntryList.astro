@@ -1,0 +1,9 @@
+---
+import { getAllEntries } from "../api";
+import Entry from "./Entry.astro";
+
+const entries = await getAllEntries();
+---
+
+<h2>Index</h2>
+{entries.map((entry) => <Entry {entry} />)}

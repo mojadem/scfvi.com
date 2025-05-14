@@ -1,0 +1,73 @@
+---
+import { getAllCampaigns, getAllEntries, getAllTypes } from "../api";
+
+const campaigns = await getAllCampaigns();
+const types = await getAllTypes();
+---
+
+<div class="flex-pad-gap">
+  <fieldset>
+    <legend>search fields</legend>
+    <div class="flex-pad-gap">
+      <label>
+        title
+        <input type="text" />
+      </label>
+      <label>
+        author
+        <input type="text" />
+      </label>
+      <label>
+        year
+        <input type="text" />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>campaigns</legend>
+    <div class="flex-pad-gap">
+      {
+        campaigns.map((campaign) => (
+          <label>
+            <input type="checkbox" />
+            {campaign.name}
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>content types</legend>
+    <div class="flex-pad-gap">
+      {
+        types.map((campaign) => (
+          <label>
+            <input type="checkbox" />
+            {campaign.name}
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+</div>
+
+<style>
+  fieldset {
+    border: 1px solid var(--black);
+  }
+
+  input {
+    background-color: transparent;
+    border: 1px solid var(--black);
+  }
+
+  label {
+    display: block;
+  }
+
+  .flex-pad-gap {
+    gap: 0.5rem;
+  }
+</style>
