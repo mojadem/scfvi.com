@@ -1,5 +1,6 @@
 import PocketBase, { RecordService } from "pocketbase";
 import type { Campaign, Entry, Type } from "./types";
+import { PB_URL } from "./env";
 
 interface TypedPocketBase extends PocketBase {
   collection(idOrName: string): RecordService;
@@ -7,8 +8,6 @@ interface TypedPocketBase extends PocketBase {
   collection(idOrName: "campaigns"): RecordService<Campaign>;
   collection(idOrName: "types"): RecordService<Type>;
 }
-
-const PB_URL = import.meta.env.PUBLIC_PB_URL;
 
 function init() {
   return new PocketBase(PB_URL) as TypedPocketBase;
