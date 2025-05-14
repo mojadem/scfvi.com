@@ -1,3 +1,8 @@
+interface EntryExpand {
+  campaign: Array<Campaign>;
+  type: Type;
+}
+
 export interface Entry {
   id: string;
   index: number;
@@ -5,11 +10,10 @@ export interface Entry {
   author: string;
   year: number;
   link: string;
-  campaign: string;
-  type: string;
   description: string;
   media: Array<string>;
   archivebox_id: string | null;
+  expand: EntryExpand;
 }
 
 export interface Campaign {
