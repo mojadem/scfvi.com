@@ -13,10 +13,8 @@ body {
   background-color: var(--lavender);
   color: var(--black);
   font-family: "Overpass Mono", monospace;
-}
 
-main {
-  max-width: 1024px;
+  max-width: 64rem;
   margin: auto;
 }
 
