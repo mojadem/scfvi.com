@@ -1,8 +1,6 @@
 <script lang="ts">
-  import {
-    filters as filters,
-    type FiltersStringKey,
-  } from "@lib/state.svelte.ts";
+  import type { FiltersStringKey } from "@lib/filter.ts";
+  import { filters as filters } from "@lib/state.svelte.ts";
 
   let { key }: { key: FiltersStringKey } = $props();
 </script>

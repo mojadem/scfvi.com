@@ -1,9 +1,6 @@
 <script lang="ts">
-  import {
-    filters,
-    toggleElement,
-    type FiltersArrayKey,
-  } from "@lib/state.svelte.ts";
+  import type { FiltersArrayKey } from "@lib/filter.ts";
+  import { filters, toggleElement } from "@lib/state.svelte.ts";
 
   let { key, value }: { key: FiltersArrayKey; value: string } = $props();
   let active = $derived(filters[key].includes(value));

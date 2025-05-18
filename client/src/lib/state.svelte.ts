@@ -1,13 +1,4 @@
-export type Filters = {
-  title: string;
-  author: string;
-  year: string;
-  campaigns: string[];
-  types: string[];
-};
-
-export type FiltersStringKey = keyof Pick<Filters, "title" | "author" | "year">;
-export type FiltersArrayKey = keyof Pick<Filters, "campaigns" | "types">;
+import { filterEntries, type Filters, type FiltersArrayKey } from "./filter.ts";
 
 export const filters = $state<Filters>({
   title: "",
