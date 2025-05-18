@@ -1,8 +1,12 @@
 ---
-import { getAllEntries } from "@lib/api.ts";
+import { type Entry as EntryType } from "@lib/types.ts";
 import Entry from "./Entry.astro";
 
-const entries = await getAllEntries();
+interface Props {
+  entries: EntryType[];
+}
+
+const { entries } = Astro.props as Props;
 ---
 
 <h2>Index</h2>
