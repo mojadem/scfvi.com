@@ -1,5 +1,8 @@
 ---
 import { getAllCampaigns, getAllEntries, getAllTypes } from "@lib/api.ts";
+import FilterInput from "./FilterInput.svelte";
+import FilterToggle from "./FilterToggle.svelte";
+import FilterReset from "./FilterReset.svelte";
 
 const campaigns = await getAllCampaigns();
 const types = await getAllTypes();
@@ -11,15 +14,15 @@ const types = await getAllTypes();
     <div class="flex-pad-gap">
       <label>
         title
-        <input type="text" />
+        <FilterInput key="title" client:load />
       </label>
       <label>
         author
-        <input type="text" />
+        <FilterInput key="author" client:load />
       </label>
       <label>
         year
-        <input type="text" />
+        <FilterInput key="year" client:load />
       </label>
     </div>
   </fieldset>
@@ -29,10 +32,7 @@ const types = await getAllTypes();
     <div class="flex-pad-gap">
       {
         campaigns.map((campaign) => (
-          <label>
-            <input type="checkbox" />
-            {campaign.name}
-          </label>
+          <FilterToggle key={"campaigns"} value={campaign.name} client:load />
         ))
       }
     </div>
@@ -42,15 +42,14 @@ const types = await getAllTypes();
     <legend>content types</legend>
     <div class="flex-pad-gap">
       {
-        types.map((campaign) => (
-          <label>
-            <input type="checkbox" />
-            {campaign.name}
-          </label>
+        types.map((type) => (
+          <FilterToggle key={"types"} value={type.name} client:load />
         ))
       }
     </div>
   </fieldset>
+
+  <FilterReset client:load />
 </div>
 
 <style>
