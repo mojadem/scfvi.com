@@ -1,12 +1,12 @@
 ---
-import { getAllCampaigns, getAllEntries, getAllTypes } from "../api";
+import { getAllCampaigns, getAllEntries, getAllTypes } from "@lib/api.ts";
 
 const campaigns = await getAllCampaigns();
 const types = await getAllTypes();
 ---
 
 <div class="flex-pad-gap">
-  <fieldset>
+  <fieldset class="search">
     <legend>search fields</legend>
     <div class="flex-pad-gap">
       <label>
@@ -56,15 +56,6 @@ const types = await getAllTypes();
 <style>
   fieldset {
     border: 1px solid var(--black);
-  }
-
-  input {
-    background-color: transparent;
-    border: 1px solid var(--black);
-  }
-
-  label {
-    display: block;
   }
 
   .flex-pad-gap {

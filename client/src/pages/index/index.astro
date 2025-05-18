@@ -1,8 +1,8 @@
 ---
-import { getAllCampaigns, getAllTypes } from "../../api";
-import EntryList from "../../components/EntryList.astro";
-import FilterList from "../../components/FilterList.astro";
-import Layout from "../../layouts/Layout.astro";
+import { getAllCampaigns, getAllTypes } from "@lib/api.ts";
+import Layout from "@lib/layouts/Layout.astro";
+import EntryList from "@lib/components/EntryList.astro";
+import FilterList from "@lib/components/FilterList.astro";
 
 const campaigns = await getAllCampaigns();
 const types = await getAllTypes();

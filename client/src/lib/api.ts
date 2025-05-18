@@ -1,6 +1,6 @@
 import PocketBase, { RecordService } from "pocketbase";
-import type { Campaign, Entry, Type } from "./types";
-import { PB_URL } from "./env";
+import type { Campaign, Entry, Type } from "@lib/types.ts";
+import { PB_URL } from "@lib/env.ts";
 
 interface TypedPocketBase extends PocketBase {
   collection(idOrName: string): RecordService;
