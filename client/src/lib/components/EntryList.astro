@@ -9,5 +9,20 @@ interface Props {
 const { entries } = Astro.props as Props;
 ---
 
+<script>
+  import { $entries } from "@lib/store";
+
+  class EntryListWrapper extends HTMLElement {
+    connectedCallback() {
+      const entries = this.dataset.entries!;
+      $entries.set(JSON.parse(entries));
+    }
+  }
+
+  customElements.define("entry-list-wrapper", EntryListWrapper);
+</script>
+
 <h2>Index</h2>
-{entries.map((entry) => <Entry {entry} />)}
+<entry-list-wrapper data-entries={JSON.stringify(entries)}>
+  {entries.map((entry) => <Entry {entry} />)}
+</entry-list-wrapper>
