@@ -1,4 +1,4 @@
-import PocketBase, { RecordService } from "pocketbase";
+import PocketBase, { type RecordService } from "pocketbase";
 import type { Campaign, Entry, Type } from "@lib/types.ts";
 import { PB_URL } from "@lib/env.ts";
 
