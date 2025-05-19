@@ -5,16 +5,17 @@
   let { key, value }: { key: FiltersArrayKey; value: string } = $props();
   let active = $state(false);
 
-  filters.listen((newFilters) => {
+  filters.subscribe((newFilters) => {
     active = newFilters[key].includes(value);
   });
 
   function updateFilters() {
-    let i = filters.get()[key].indexOf(value);
+    let currentFilters = filters.get()[key];
+    let i = currentFilters.indexOf(value);
     if (i < 0) {
-      filters.setKey(key, [...filters.get()[key], value]);
+      filters.setKey(key, [...currentFilters, value]);
     } else {
-      filters.setKey(key, filters.get()[key].splice(i));
+      filters.setKey(key, [...currentFilters.filter((v) => v != value)]);
     }
   }
 </script>
