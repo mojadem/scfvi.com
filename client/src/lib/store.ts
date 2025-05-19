@@ -8,7 +8,7 @@ export const entries = atom<Entry[]>([]);
 export const filteredEntries = computed(
   [entries, filters],
   (entries, filters) => {
-    return filterEntries(entries, filters);
+    return filterEntries(entries, filters).map((entry) => entry.id);
   },
 );
 
