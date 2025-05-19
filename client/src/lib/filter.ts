@@ -17,11 +17,9 @@ export function filterEntries(entries: Entry[], filters: Filters): Entry[] {
       entry.title.includes(filters.title) &&
       entry.author.includes(filters.author) &&
       entry.year.toString().includes(filters.year) &&
-      filters.campaigns.some((filterCammpaign) =>
-        entry.expand.campaign.find(
-          (campaign) => filterCammpaign == campaign.name,
-        ),
+      entry.expand.campaign.some(
+        (campaign) => !filters.campaigns.includes(campaign.name),
       ) &&
-      filters.types.includes(entry.expand.type.name),
+      !filters.types.includes(entry.expand.type.name),
   );
 }
