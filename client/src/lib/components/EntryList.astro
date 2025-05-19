@@ -10,12 +10,12 @@ const { entries } = Astro.props as Props;
 ---
 
 <script>
-  import { $entries } from "@lib/store";
+  import { entries as entriesStore } from "@lib/store.ts";
 
   class EntryListWrapper extends HTMLElement {
     connectedCallback() {
       const entries = this.dataset.entries!;
-      $entries.set(JSON.parse(entries));
+      entriesStore.set(JSON.parse(entries));
     }
   }
 
