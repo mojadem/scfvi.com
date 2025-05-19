@@ -8,6 +8,14 @@ export type Filters = {
   types: string[];
 };
 
+export const defaultFilters: Filters = {
+  title: "",
+  author: "",
+  year: "",
+  campaigns: [],
+  types: [],
+};
+
 export type FiltersStringKey = keyof Pick<Filters, "title" | "author" | "year">;
 export type FiltersArrayKey = keyof Pick<Filters, "campaigns" | "types">;
 
