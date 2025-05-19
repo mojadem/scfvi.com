@@ -11,11 +11,3 @@ export const filteredEntries = computed(
     return filterEntries(entries, filters).map((entry) => entry.id);
   },
 );
-
-effect([filters], (filters) => {
-  console.log(filters);
-});
-
-effect([filteredEntries], (filteredEntries) => {
-  console.log(filteredEntries);
-});
