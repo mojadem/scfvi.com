@@ -9,12 +9,10 @@ interface TypedPocketBase extends PocketBase {
   collection(idOrName: "types"): RecordService<Type>;
 }
 
-function init() {
-  return new PocketBase(PB_URL) as TypedPocketBase;
-}
+const pb = new PocketBase(PB_URL) as TypedPocketBase;
+console.log(`init PocketBase with URL: ${PB_URL}`);
 
 export async function getAllEntries() {
-  const pb = init();
   const entries = await pb.collection("entries").getFullList({
     expand: "campaign,type",
     sort: "year,title",
@@ -24,11 +22,9 @@ export async function getAllEntries() {
 }
 
 export async function getAllCampaigns() {
-  const pb = init();
   return await pb.collection("campaigns").getFullList({ sort: "name" });
 }
 
 export async function getAllTypes() {
-  const pb = init();
   return await pb.collection("types").getFullList({ sort: "name" });
 }
