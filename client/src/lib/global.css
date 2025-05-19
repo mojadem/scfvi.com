@@ -24,6 +24,7 @@ body {
 }
 
 h1,
+h1 a,
 h2 {
   font-family: "Gabarito Variable", system-ui, sans-serif;
   font-weight: 700;
