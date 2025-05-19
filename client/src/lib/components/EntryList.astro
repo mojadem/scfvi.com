@@ -1,6 +1,7 @@
 ---
 import { type Entry as EntryType } from "@lib/types.ts";
 import Entry from "./Entry.astro";
+import EntryListCounter from "./EntryListCounter.svelte";
 
 interface Props {
   entries: EntryType[];
@@ -23,6 +24,7 @@ const { entries } = Astro.props as Props;
 </script>
 
 <h2>Index</h2>
+<EntryListCounter client:load />
 <entry-list-wrapper data-entries={JSON.stringify(entries)}>
   {entries.map((entry) => <Entry {entry} />)}
 </entry-list-wrapper>
