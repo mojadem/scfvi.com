@@ -22,6 +22,15 @@ const shouldShowYouTube =
 function formatMediaLink(file: string) {
   return `${PB_URL}/api/files/entries/${entry.id}/${file}`;
 }
+
+function formatArchiveLink() {
+  let link = `${ARCHIVEBOX_URL}/archive/${entry.archivebox_id}/index.html`;
+  if (entry.expand.type.name === "Video") {
+    link += "#media";
+  }
+
+  return link;
+}
 ---
 
 <details>
@@ -38,10 +47,7 @@ function formatMediaLink(file: string) {
     <a href={entry.link} target="_blank">link</a>
     {
       entry.archivebox_id != "" && (
-        <a
-          href={`${ARCHIVEBOX_URL}/archive/${entry.archivebox_id}`}
-          target="_blank"
-        >
+        <a href={formatArchiveLink()} target="_blank">
           archive
           <a />
         </a>
