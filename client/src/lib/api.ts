@@ -10,7 +10,6 @@ interface TypedPocketBase extends PocketBase {
 }
 
 const pb = new PocketBase(PB_URL) as TypedPocketBase;
-console.log(`init PocketBase with URL: ${PB_URL}`);
 
 export async function getAllEntries() {
   const entries = await pb.collection("entries").getFullList({
