@@ -1,12 +1,10 @@
 ---
-import { getAllCampaigns, getAllEntries, getAllTypes } from "@lib/api.ts";
+import { getAllEntries } from "@lib/api.ts";
 import Layout from "@lib/layouts/Layout.astro";
 import EntryList from "@lib/components/EntryList.astro";
 import FilterList from "@lib/components/FilterList.astro";
 
 const entries = await getAllEntries();
-const campaigns = await getAllCampaigns();
-const types = await getAllTypes();
 ---
 
 <script is:inline async src="https://platform.twitter.com/widgets.js"></script>
