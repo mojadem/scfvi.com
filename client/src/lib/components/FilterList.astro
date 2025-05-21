@@ -2,6 +2,7 @@
 import { getAllCampaigns, getAllEntries, getAllTypes } from "@lib/api.ts";
 import FilterInput from "./FilterInput.svelte";
 import FilterToggle from "./FilterToggle.svelte";
+import FilterToggleAll from "./FilterToggleAll.svelte";
 import FilterReset from "./FilterReset.svelte";
 
 const campaigns = await getAllCampaigns();
@@ -36,6 +37,11 @@ const types = await getAllTypes();
         ))
       }
     </div>
+    <FilterToggleAll
+      key={"campaigns"}
+      values={campaigns.map((campaign) => campaign.name)}
+      client:load
+    />
   </fieldset>
 
   <fieldset>
@@ -47,6 +53,11 @@ const types = await getAllTypes();
         ))
       }
     </div>
+    <FilterToggleAll
+      key={"types"}
+      values={types.map((type) => type.name)}
+      client:load
+    />
   </fieldset>
 
   <FilterReset client:load />
