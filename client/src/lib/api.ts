@@ -11,13 +11,22 @@ interface TypedPocketBase extends PocketBase {
 
 const pb = new PocketBase(PB_URL) as TypedPocketBase;
 
+function formatEntryTitle(entry: Entry) {
+  return entry.title != "" ? entry.title : entry.expand.type.name;
+}
+
 export async function getAllEntries() {
   const entries = await pb.collection("entries").getFullList({
     expand: "campaign,type",
     sort: "year,title",
   });
 
-  return entries.map((entry, index) => ({ ...entry, index }));
+  return entries
+    .map((entry, index) => ({ ...entry, index }))
+    .map((e) => {
+      e.title = formatEntryTitle(e);
+      return e;
+    });
 }
 
 export async function getAllCampaigns() {
