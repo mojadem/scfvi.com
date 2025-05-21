@@ -5,6 +5,7 @@ import {
   filterEntries,
   type Filters,
   type FiltersArrayKey,
+  type FiltersStringKey,
 } from "@lib/filter.ts";
 
 export const entries = atom<Entry[]>([]);
@@ -30,10 +31,31 @@ export function toggleOneArrayValue(key: FiltersArrayKey, value: string) {
   }
 }
 
+export function toggleAllButOneArrayValue(
+  key: FiltersArrayKey,
+  targetValue: string,
+  allValues: string[],
+) {
+  const targetArray = allValues.filter((v) => v !== targetValue);
+  if (filters.get()[key] === targetArray) {
+    filters.setKey(key, []);
+  } else {
+    filters.setKey(key, [...targetArray]);
+  }
+}
+
 export function toggleAllArrayValues(key: FiltersArrayKey, values: string[]) {
   if (filters.get()[key].length) {
     filters.setKey(key, []);
   } else {
     filters.setKey(key, [...values]);
+  }
+}
+
+export function toggleString(key: FiltersStringKey, value: string) {
+  if (filters.get()[key] === value) {
+    filters.setKey(key, "");
+  } else {
+    filters.setKey(key, value);
   }
 }

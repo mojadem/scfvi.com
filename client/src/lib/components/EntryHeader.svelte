@@ -1,24 +1,63 @@
 <script lang="ts">
+  import {
+    campaigns,
+    filters,
+    toggleAllButOneArrayValue,
+    toggleString,
+    types,
+  } from "@lib/store.ts";
   import type { Entry } from "@lib/types.ts";
 
   let { entry }: { entry: Entry } = $props();
 
-  function formatIndex(index: number) {
-    return (index + 1).toString().padStart(3, "0");
+  function formatIndex() {
+    return (entry.index + 1).toString().padStart(3, "0");
   }
 </script>
 
 <header>
   <span class="index">
-    {formatIndex(entry.index)}
+    {formatIndex()}
   </span>
   <div class="flex-pad-gap content">
-    <h3>{entry.title != "" ? entry.title : entry.expand.type.name}</h3>
+    <button
+      onclick={() => {
+        toggleString("title", entry.title);
+      }}
+    >
+      <h3>{entry.title}</h3>
+    </button>
     <div>
-      {entry.expand.type.name}, {entry.author}, {entry.year}
+      <button
+        onclick={() =>
+          toggleAllButOneArrayValue(
+            "types",
+            entry.expand.type.name,
+            types.get().map((t) => t.name),
+          )}
+      >
+        {entry.expand.type.name}
+      </button>,
+      <button onclick={() => toggleString("author", entry.author)}>
+        {entry.author}
+      </button>,
+      <button onclick={() => toggleString("year", entry.year.toString())}>
+        {entry.year}
+      </button>
     </div>
     <div class="bold">
-      {entry.expand.campaign.map((campaign) => campaign.name).join(" ")}
+      {#each entry.expand.campaign as campaign}
+        <button
+          onclick={() =>
+            toggleAllButOneArrayValue(
+              "campaigns",
+              campaign.name,
+              campaigns.get().map((c) => c.name),
+            )}
+        >
+          {campaign.name}
+        </button>
+      {/each}
     </div>
   </div>
 </header>
@@ -26,6 +65,12 @@
 <style>
   header {
     display: flex;
+  }
+
+  button {
+    font: inherit;
+    text-align: inherit;
+    padding: 0;
   }
 
   h3 {
