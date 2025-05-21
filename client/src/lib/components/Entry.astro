@@ -1,5 +1,6 @@
 ---
 import type { Entry } from "@lib/types.ts";
+import EntryHeader from "./EntryHeader.svelte";
 import EntryDetails from "./EntryDetails.astro";
 
 interface Props {
@@ -7,10 +8,6 @@ interface Props {
 }
 
 const { entry } = Astro.props as Props;
-
-function formatIndex(index: number) {
-  return (index + 1).toString().padStart(3, "0");
-}
 ---
 
 <script>
@@ -37,18 +34,7 @@ function formatIndex(index: number) {
 <entry-wrapper id={entry.id} data-id={entry.id}>
   <article class="flex-pad-gap">
     <header>
-      <span class="index">
-        {formatIndex(entry.index)}
-      </span>
-      <div class="flex-pad-gap content">
-        <h3>{entry.title != "" ? entry.title : entry.expand.type.name}</h3>
-        <div>
-          {entry.expand.type.name}, {entry.author}, {entry.year}
-        </div>
-        <div class="bold">
-          {entry.expand.campaign.map((campaign) => campaign.name).join(" ")}
-        </div>
-      </div>
+      <EntryHeader entry={entry} client:load />
     </header>
     <EntryDetails {entry} />
   </article>
@@ -59,23 +45,6 @@ function formatIndex(index: number) {
     padding: 1rem;
     border-top: 1px solid var(--black);
     gap: 0.5rem;
-  }
-
-  header {
-    display: flex;
-  }
-
-  h3 {
-    margin: 0;
-  }
-
-  .index {
-    font-size: 1.5rem;
-    margin-right: 1rem;
-  }
-
-  .content {
-    gap: 0.25rem;
   }
 
   .hidden {
