@@ -1,22 +1,29 @@
 ---
-import { type Entry as EntryType } from "@lib/types.ts";
+import {
+  type Campaign,
+  type Entry as EntryType,
+  type Type,
+} from "@lib/types.ts";
 import Entry from "./Entry.astro";
 import EntryListCounter from "./EntryListCounter.svelte";
 
 interface Props {
   entries: EntryType[];
+  campaigns: Campaign[];
+  types: Type[];
 }
 
-const { entries } = Astro.props as Props;
+const { entries, campaigns, types } = Astro.props as Props;
 ---
 
 <script>
-  import { entries as entriesStore } from "@lib/store.ts";
+  import { entries, campaigns, types } from "@lib/store.ts";
 
   class EntryListWrapper extends HTMLElement {
     connectedCallback() {
-      const entries = this.dataset.entries!;
-      entriesStore.set(JSON.parse(entries));
+      entries.set(JSON.parse(this.dataset.entries!));
+      campaigns.set(JSON.parse(this.dataset.campaigns!));
+      types.set(JSON.parse(this.dataset.types!));
     }
   }
 
@@ -25,6 +32,10 @@ const { entries } = Astro.props as Props;
 
 <h2>Index</h2>
 <EntryListCounter client:load />
-<entry-list-wrapper data-entries={JSON.stringify(entries)}>
+<entry-list-wrapper
+  data-entries={JSON.stringify(entries)}
+  data-campaigns={JSON.stringify(campaigns)}
+  data-types={JSON.stringify(types)}
+>
   {entries.map((entry) => <Entry {entry} />)}
 </entry-list-wrapper>
