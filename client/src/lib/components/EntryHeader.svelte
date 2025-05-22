@@ -1,11 +1,9 @@
 <script lang="ts">
+  import { campaigns, types } from "@lib/stores/entries.ts";
   import {
-    campaigns,
-    filters,
     toggleAllButOneArrayValue,
     toggleString,
-    types,
-  } from "@lib/store.ts";
+  } from "@lib/stores/filters.ts";
   import type { Entry } from "@lib/types.ts";
 
   let { entry }: { entry: Entry } = $props();

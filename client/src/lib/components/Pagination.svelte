@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { filteredEntries } from "@lib/store.ts";
+  import { filteredEntries } from "@lib/stores/entries.ts";
   import { page, PAGE_SIZE } from "@lib/stores/page.ts";
 
   let numPages = $state(0);

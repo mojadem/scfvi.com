@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FiltersArrayKey } from "@lib/filter.ts";
-  import { filters, toggleOneArrayValue } from "@lib/store.ts";
+  import { filters, toggleOneArrayValue } from "@lib/stores/filters.ts";
 
   let { key, value }: { key: FiltersArrayKey; value: string } = $props();
   let active = $state(false);

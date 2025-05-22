@@ -18,7 +18,7 @@ const { entries, campaigns, types } = Astro.props as Props;
 ---
 
 <script>
-  import { entries, campaigns, types } from "@lib/store.ts";
+  import { entries, campaigns, types } from "@lib/stores/entries.ts";
 
   class EntryListWrapper extends HTMLElement {
     connectedCallback() {

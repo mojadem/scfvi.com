@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { FiltersStringKey } from "@lib/filter.ts";
-  import { filters } from "@lib/store.ts";
+  import { filters } from "@lib/stores/filters.ts";
 
   let { key }: { key: FiltersStringKey } = $props();
   let value = $state("");

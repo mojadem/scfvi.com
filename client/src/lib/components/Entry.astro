@@ -11,7 +11,7 @@ const { entry } = Astro.props as Props;
 ---
 
 <script>
-  import { filteredEntries } from "@lib/store.ts";
+  import { filteredEntries } from "@lib/stores/entries.ts";
   import { getPageOfEntry, page } from "@lib/stores/page.ts";
   import { effect } from "nanostores";
 

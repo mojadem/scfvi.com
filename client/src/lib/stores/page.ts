@@ -1,4 +1,4 @@
-import { filteredEntries } from "@lib/store.ts";
+import { filteredEntries } from "@lib/stores/entries.ts";
 import { atom } from "nanostores";
 
 export const PAGE_SIZE = 20;
