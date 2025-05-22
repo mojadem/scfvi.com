@@ -10,6 +10,9 @@
 </script>
 
 <nav>
+  {#if $page !== 0}
+    <button onclick={() => page.set(page.get() - 1)}>&lt;</button>
+  {/if}
   {#each Array(numPages) as _, i}
     {#if i === $page}
       <span class="bold">{i + 1}</span>
@@ -23,6 +26,9 @@
       </button>
     {/if}
   {/each}
+  {#if $page !== numPages - 1}
+    <button onclick={() => page.set(page.get() + 1)}>&gt;</button>
+  {/if}
 </nav>
 
 <style>
