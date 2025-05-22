@@ -3,33 +3,81 @@
   import { page, PAGE_SIZE } from "@lib/stores/page.ts";
 
   let numPages = $state(0);
+  let paginationNumbers = $state<number[]>([]);
 
   filteredEntries.subscribe((entries) => {
     numPages = Math.ceil(entries.length / PAGE_SIZE);
   });
 
-  page.subscribe(() => window.scrollTo(0, 0));
+  page.subscribe((value) => {
+    paginationNumbers = getPaginationNumbers(value);
+    window.scrollTo(0, 0);
+  });
+
+  function getPaginationNumbers(curPage: number) {
+    if (numPages < 7) {
+      let arr = [];
+      for (let i = 0; i < numPages; i++) {
+        arr.push(i);
+      }
+      return arr;
+    }
+
+    if (curPage < 4) {
+      return [0, 1, 2, 3, 4, numPages - 1];
+    }
+
+    if (curPage > numPages - 5) {
+      return [
+        0,
+        numPages - 5,
+        numPages - 4,
+        numPages - 3,
+        numPages - 2,
+        numPages - 1,
+      ];
+    }
+
+    return [0, curPage - 1, curPage, curPage + 1, numPages - 1];
+  }
 </script>
 
 <nav>
-  {#if $page !== 0}
-    <button onclick={() => page.set(page.get() - 1)}>&lt;</button>
-  {/if}
-  {#each Array(numPages) as _, i}
-    {#if i === $page}
-      <span class="bold">{i + 1}</span>
-    {:else}
+  {#if numPages > 1}
+    {#if $page !== 0}
       <button
-        onclick={() => {
-          page.set(i);
-        }}
+        class="pagination-button"
+        onclick={() => page.set(page.get() - 1)}
       >
-        {i + 1}
+        &lt;
       </button>
+    {:else}
+      <span class="pagination-button">&nbsp;</span>
     {/if}
-  {/each}
-  {#if $page !== numPages - 1}
-    <button onclick={() => page.set(page.get() + 1)}>&gt;</button>
+    {#each paginationNumbers as p}
+      {#if p === $page}
+        <span class="bold pagination-button">{p + 1}</span>
+      {:else}
+        <button
+          class="pagination-button"
+          onclick={() => {
+            page.set(p);
+          }}
+        >
+          {p + 1}
+        </button>
+      {/if}
+    {/each}
+    {#if $page !== numPages - 1}
+      <button
+        class="pagination-button"
+        onclick={() => page.set(page.get() + 1)}
+      >
+        &gt;
+      </button>
+    {:else}
+      <span class="pagination-button">&nbsp;</span>
+    {/if}
   {/if}
 </nav>
 
@@ -44,5 +92,10 @@
   button {
     font: inherit;
     padding: 0;
+  }
+
+  .pagination-button {
+    width: 2rem;
+    text-align: center;
   }
 </style>
