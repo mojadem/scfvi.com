@@ -40,4 +40,4 @@ const { entries, campaigns, types } = Astro.props as Props;
 >
   {entries.map((entry) => <Entry {entry} />)}
 </entry-list-wrapper>
-<Pagination client:load />
+<Pagination client:only="svelte" />

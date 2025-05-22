@@ -7,6 +7,8 @@
   filteredEntries.subscribe((entries) => {
     numPages = Math.ceil(entries.length / PAGE_SIZE);
   });
+
+  page.subscribe(() => window.scrollTo(0, 0));
 </script>
 
 <nav>
