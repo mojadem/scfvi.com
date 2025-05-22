@@ -24,7 +24,8 @@ export function toggleAllButOneArrayValue(
   allValues: string[],
 ) {
   const targetArray = allValues.filter((v) => v !== targetValue);
-  if (filters.get()[key] === targetArray) {
+  const currentArray = filters.get()[key];
+  if (JSON.stringify(currentArray) === JSON.stringify(targetArray)) {
     filters.setKey(key, []);
   } else {
     filters.setKey(key, [...targetArray]);
