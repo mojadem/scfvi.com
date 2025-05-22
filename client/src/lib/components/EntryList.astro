@@ -6,6 +6,7 @@ import {
 } from "@lib/types.ts";
 import Entry from "./Entry.astro";
 import EntryListCounter from "./EntryListCounter.svelte";
+import Pagination from "./Pagination.svelte";
 
 interface Props {
   entries: EntryType[];
@@ -39,3 +40,4 @@ const { entries, campaigns, types } = Astro.props as Props;
 >
   {entries.map((entry) => <Entry {entry} />)}
 </entry-list-wrapper>
+<Pagination client:load />

@@ -12,14 +12,16 @@ const { entry } = Astro.props as Props;
 
 <script>
   import { filteredEntries } from "@lib/store.ts";
+  import { getPageOfEntry, page } from "@lib/stores/page.ts";
+  import { effect } from "nanostores";
 
   class EntryWrapper extends HTMLElement {
     connectedCallback() {
       const id = this.dataset.id!;
       const el = document.getElementById(id)!;
 
-      filteredEntries.subscribe((entries) => {
-        if (entries.includes(id)) {
+      effect([page, filteredEntries], (page) => {
+        if (getPageOfEntry(id) === page) {
           el.classList.remove("hidden");
         } else {
           el.classList.add("hidden");
