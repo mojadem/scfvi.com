@@ -4,6 +4,7 @@ export type Filters = {
   title: string;
   author: string;
   year: string;
+  link: string;
   campaigns: string[];
   types: string[];
 };
@@ -12,6 +13,7 @@ export const defaultFilters: Filters = {
   title: "",
   author: "",
   year: "",
+  link: "",
   campaigns: [],
   types: [],
 };
@@ -29,6 +31,7 @@ export function filterEntries(entries: Entry[], filters: Filters): Entry[] {
       checkForSubstring(entry.title, filters.title) &&
       checkForSubstring(entry.author, filters.author) &&
       checkForSubstring(entry.year.toString(), filters.year) &&
+      checkForSubstring(entry.link, filters.link) &&
       entry.expand.campaign.some(
         (campaign) => !filters.campaigns.includes(campaign.name),
       ) &&
