@@ -1,6 +1,7 @@
 <script lang="ts">
   import { filteredEntries } from "@lib/stores/entries.ts";
   import { page, PAGE_SIZE } from "@lib/stores/page.ts";
+  import { effect } from "nanostores";
 
   let numPages = $state(0);
   let paginationNumbers = $state<number[]>([]);
@@ -9,8 +10,8 @@
     numPages = Math.ceil(entries.length / PAGE_SIZE);
   });
 
-  page.subscribe((value) => {
-    paginationNumbers = getPaginationNumbers(value);
+  effect([page, filteredEntries], (newPage) => {
+    paginationNumbers = getPaginationNumbers(newPage);
     window.scrollTo(0, 0);
   });
 
