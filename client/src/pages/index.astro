@@ -3,7 +3,9 @@ import Layout from "@lib/layouts/Layout.astro";
 ---
 
 <Layout>
-  <a href="/index/">view the index</a>
+  <nav>
+    <a class="index-link" href="/index/">view the index</a>
+  </nav>
 
   <h2>About the Saudi Cyberfeminist Visual Index (SCFVI)</h2>
   <p>
@@ -59,3 +61,17 @@ import Layout from "@lib/layouts/Layout.astro";
     <a href="mailto:scfvi.com@gmail.com">scfvi.com@gmail.com</a>.
   </p>
 </Layout>
+
+<style>
+  nav {
+    display: grid;
+    place-content: center;
+    margin: 2rem;
+  }
+
+  .index-link {
+    font-size: 1.25rem;
+    width: 100%;
+    margin: auto;
+  }
+</style>
