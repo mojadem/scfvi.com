@@ -8,13 +8,20 @@ import {
 
 export const filters = map<Filters>(defaultFilters);
 
-export function toggleOneArrayValue(key: FiltersArrayKey, value: string) {
+export function toggleOneArrayValue(
+  key: FiltersArrayKey,
+  targetValue: string,
+  allValues: string[],
+) {
   let currentFilters = filters.get()[key];
-  let i = currentFilters.indexOf(value);
-  if (i < 0) {
-    filters.setKey(key, [...currentFilters, value]);
+  let i = currentFilters.indexOf(targetValue);
+
+  if (currentFilters.length === 0) {
+    filters.setKey(key, [...allValues.filter((v) => v !== targetValue)]);
+  } else if (i < 0) {
+    filters.setKey(key, [...currentFilters, targetValue]);
   } else {
-    filters.setKey(key, [...currentFilters.filter((v) => v != value)]);
+    filters.setKey(key, [...currentFilters.filter((v) => v != targetValue)]);
   }
 }
 

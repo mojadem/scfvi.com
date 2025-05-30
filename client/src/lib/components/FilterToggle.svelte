@@ -2,7 +2,7 @@
   import type { FiltersArrayKey } from "@lib/filter.ts";
   import { filters, toggleOneArrayValue } from "@lib/stores/filters.ts";
 
-  let { key, value }: { key: FiltersArrayKey; value: string } = $props();
+  let { key, value, values }: { key: FiltersArrayKey; value: string; values: string[] } = $props();
   let active = $state(false);
 
   filters.subscribe((newFilters) => {
@@ -10,7 +10,7 @@
   });
 </script>
 
-<button class:active onclick={() => toggleOneArrayValue(key, value)}>
+<button class:active onclick={() => toggleOneArrayValue(key, value, values)}>
   {value}
 </button>
 

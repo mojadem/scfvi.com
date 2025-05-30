@@ -2,7 +2,6 @@
 import { getAllCampaigns, getAllTypes } from "@lib/api.ts";
 import FilterInput from "./FilterInput.svelte";
 import FilterToggle from "./FilterToggle.svelte";
-import FilterToggleAll from "./FilterToggleAll.svelte";
 import FilterReset from "./FilterReset.svelte";
 
 const campaigns = await getAllCampaigns();
@@ -37,15 +36,15 @@ const types = await getAllTypes();
     <div class="flex-pad-gap">
       {
         campaigns.map((campaign) => (
-          <FilterToggle key={"campaigns"} value={campaign.name} client:load />
+          <FilterToggle
+            key={"campaigns"}
+            value={campaign.name}
+            values={campaigns.map((c) => c.name)}
+            client:load
+          />
         ))
       }
     </div>
-    <FilterToggleAll
-      key={"campaigns"}
-      values={campaigns.map((campaign) => campaign.name)}
-      client:load
-    />
   </fieldset>
 
   <fieldset>
@@ -53,15 +52,15 @@ const types = await getAllTypes();
     <div class="flex-pad-gap">
       {
         types.map((type) => (
-          <FilterToggle key={"types"} value={type.name} client:load />
+          <FilterToggle
+            key={"types"}
+            value={type.name}
+            values={types.map((t) => t.name)}
+            client:load
+          />
         ))
       }
     </div>
-    <FilterToggleAll
-      key={"types"}
-      values={types.map((type) => type.name)}
-      client:load
-    />
   </fieldset>
 
   <FilterReset client:load />
