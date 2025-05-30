@@ -3,6 +3,7 @@ import { getAllCampaigns, getAllEntries, getAllTypes } from "@lib/api.ts";
 import Layout from "@lib/layouts/Layout.astro";
 import EntryList from "@lib/components/EntryList.astro";
 import FilterList from "@lib/components/FilterList.astro";
+import FilterReset from "@lib/components/FilterReset.svelte";
 
 const entries = await getAllEntries();
 const campaigns = await getAllCampaigns();
@@ -14,6 +15,7 @@ const types = await getAllTypes();
   <main>
     <aside>
       <h2>Filters</h2>
+      <FilterReset client:load />
       <details open>
         <summary>view filters</summary>
         <FilterList />
@@ -43,6 +45,10 @@ const types = await getAllTypes();
 
       border-left: 1px solid var(--black);
       padding-left: 1rem;
+    }
+
+    details {
+      margin-top: 0.5rem;
     }
   }
 </style>

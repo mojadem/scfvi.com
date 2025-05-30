@@ -8,3 +8,9 @@
 </script>
 
 <button onclick={resetFilters}>reset</button>
+
+<style>
+  button {
+    font-size: 1rem;
+  }
+</style>

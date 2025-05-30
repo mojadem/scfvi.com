@@ -2,7 +2,6 @@
 import { getAllCampaigns, getAllTypes } from "@lib/api.ts";
 import FilterInput from "./FilterInput.svelte";
 import FilterToggle from "./FilterToggle.svelte";
-import FilterReset from "./FilterReset.svelte";
 
 const campaigns = await getAllCampaigns();
 const types = await getAllTypes();
@@ -62,8 +61,6 @@ const types = await getAllTypes();
       }
     </div>
   </fieldset>
-
-  <FilterReset client:load />
 </div>
 
 <style>
