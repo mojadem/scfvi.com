@@ -1,5 +1,5 @@
 import PocketBase, { type RecordService } from "pocketbase";
-import type { Campaign, Entry, Type } from "@lib/types.ts";
+import type { Campaign, Entry, Translation, Type } from "@lib/types.ts";
 import { PB_URL } from "@lib/env.ts";
 
 interface TypedPocketBase extends PocketBase {
@@ -7,6 +7,7 @@ interface TypedPocketBase extends PocketBase {
   collection(idOrName: "entries"): RecordService<Entry>;
   collection(idOrName: "campaigns"): RecordService<Campaign>;
   collection(idOrName: "types"): RecordService<Type>;
+  collection(idOrName: "translations"): RecordService<Translation>;
 }
 
 const pb = new PocketBase(PB_URL) as TypedPocketBase;
@@ -35,4 +36,8 @@ export async function getAllCampaigns() {
 
 export async function getAllTypes() {
   return await pb.collection("types").getFullList({ sort: "name" });
+}
+
+export async function getAllTranslations() {
+  return await pb.collection("translations").getFullList();
 }

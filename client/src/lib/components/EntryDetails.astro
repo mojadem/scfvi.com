@@ -2,12 +2,16 @@
 import { Tweet, YouTube } from "astro-embed";
 import { ARCHIVEBOX_URL, PB_URL } from "@lib/env.ts";
 import type { Entry } from "@lib/types.ts";
+import { useTranslations, type SupportedLocale } from "@lib/i18n.ts";
 
 interface Props {
   entry: Entry;
 }
 
 const { entry } = Astro.props as Props;
+
+const locale = Astro.currentLocale! as SupportedLocale;
+const i18n = useTranslations(locale);
 
 const youTubePrefix = "https://www.youtube.com/watch?v=";
 const tweetPrefix = "https://x.com/";
@@ -34,7 +38,7 @@ function formatArchiveLink() {
 ---
 
 <details>
-  <summary>details</summary>
+  <summary>{i18n("details")}</summary>
   <p>
     {shouldShowTweet && <Tweet id={entry.link} theme="dark" />}
     {shouldShowYouTube && <YouTube id={entry.link} />}
@@ -44,11 +48,11 @@ function formatArchiveLink() {
     <Fragment set:html={entry.description} />
   </p>
   <p>
-    <a href={entry.link} target="_blank">link</a>
+    <a href={entry.link} target="_blank">{i18n("link")}</a>
     {
       entry.archivebox_id != "" && (
         <a href={formatArchiveLink()} target="_blank">
-          archive
+          {i18n("archive")}
           <a />
         </a>
       )

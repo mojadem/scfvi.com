@@ -25,3 +25,9 @@ export interface Type {
   id: string;
   name: string;
 }
+
+export interface Translation {
+  id: string;
+  en: string;
+  ar: string;
+}

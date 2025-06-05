@@ -1,12 +1,15 @@
 ---
 import "@fontsource-variable/gabarito";
 import "@fontsource-variable/overpass-mono";
-
 import "@lib/global.css";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import type { SupportedLocale } from "@lib/i18n.ts";
+
+const locale = Astro.currentLocale! as SupportedLocale;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,7 +18,9 @@ import "@lib/global.css";
     <title>SCFVI</title>
   </head>
   <body>
-    <h1><a href="/">SCFVI</a></h1>
+    <h1>
+      <a href={getRelativeLocaleUrl(locale, "")}>SCFVI</a>
+    </h1>
     <slot />
   </body>
 </html>
