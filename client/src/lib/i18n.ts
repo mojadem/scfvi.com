@@ -3,6 +3,7 @@ import { getAllTranslations } from "./api";
 const defaultLocale = "en";
 
 export type SupportedLocale = "en" | "ar";
+export const supportedLocales: SupportedLocale[] = ["en", "ar"];
 
 const translations = await getAllTranslations();
 
@@ -18,4 +19,11 @@ export function useTranslations(locale: SupportedLocale) {
 
     return translationEntry[locale] || translationEntry[defaultLocale];
   };
+}
+
+export function removeLocaleFromUrl(url: string) {
+  return url
+    .split("/")
+    .filter((p) => !supportedLocales.includes(p as SupportedLocale))
+    .join("/");
 }
