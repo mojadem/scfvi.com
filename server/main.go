@@ -12,19 +12,19 @@ import (
 func main() {
 	app := pocketbase.New()
 
-	app.OnRecordAfterCreateSuccess("entries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterCreateSuccess().BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordCreate triggered", "id", e.Record.Id)
 		deployFrontend(app)
 		return e.Next()
 	})
 
-	app.OnRecordAfterUpdateSuccess("entries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterUpdateSuccess().BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordUpdate triggered", "id", e.Record.Id)
 		deployFrontend(app)
 		return e.Next()
 	})
 
-	app.OnRecordAfterDeleteSuccess("entries").BindFunc(func(e *core.RecordEvent) error {
+	app.OnRecordAfterDeleteSuccess().BindFunc(func(e *core.RecordEvent) error {
 		app.Logger().Debug("OnRecordDelete triggered", "id", e.Record.Id)
 		deployFrontend(app)
 		return e.Next()
