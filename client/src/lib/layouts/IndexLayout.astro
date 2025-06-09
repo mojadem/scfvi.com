@@ -19,7 +19,9 @@ const types = await getAllTypes();
   <main>
     <aside>
       <h2>{i18n("Filters")}</h2>
-      <FilterReset locale={locale} client:load />
+      <FilterReset client:load>
+        <Fragment>{i18n("reset")}</Fragment>
+      </FilterReset>
       <details open>
         <summary>{i18n("view filters")}</summary>
         <FilterList />

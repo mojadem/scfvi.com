@@ -44,7 +44,9 @@ const types = await getAllTypes();
             value={campaign.name}
             values={campaigns.map((c) => c.name)}
             client:load
-          />
+          >
+            <Fragment>{campaign.name}</Fragment>
+          </FilterToggle>
         ))
       }
     </div>
@@ -60,7 +62,9 @@ const types = await getAllTypes();
             value={type.name}
             values={types.map((t) => t.name)}
             client:load
-          />
+          >
+            <Fragment>{i18n(type.name)}</Fragment>
+          </FilterToggle>
         ))
       }
     </div>

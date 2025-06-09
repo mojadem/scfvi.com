@@ -34,7 +34,8 @@
             types.get().map((t) => t.name),
           )}
       >
-        {entry.expand.type.name}
+        <!-- svelte-ignore slot_element_deprecated -->
+        <slot name="type" />
       </button>,
       <button onclick={() => toggleString("author", entry.author)}>
         {entry.author}
