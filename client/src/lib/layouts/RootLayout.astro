@@ -44,13 +44,12 @@ const i18n = useTranslations(locale);
         "To ensure long-term access, data integrity, and decentralized distribution, the archive is available through the InterPlanetary File System (IPFS). The full archive is downloadable with the following IPNS name:",
       )
     }
-    <br />
     <a
       href="https://ipfs.scfvi.com/ipns/k51qzi5uqu5dk2utf9pdq5720xex3skpfyc6bh52htsib3iwhk98661izn0x4x"
+      class="ipns-link"
     >
       /ipns/k51qzi5uqu5dk2utf9pdq5720xex3skpfyc6bh52htsib3iwhk98661izn0x4x
     </a>
-    <br />
   </p>
   <p>
     <a href="https://docs.ipfs.tech/quickstart/retrieve/"
@@ -101,6 +100,13 @@ const i18n = useTranslations(locale);
       font-size: 1.25rem;
       width: 100%;
       margin: auto;
+    }
+
+    .ipns-link {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0.5rem 0;
     }
   </style>
 </BaseLayout>
