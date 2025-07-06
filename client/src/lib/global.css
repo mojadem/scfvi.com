@@ -1,0 +1,70 @@
+:root {
+  --lavender: #a68ec5;
+  --black: #000000;
+  --green: #00ff00;
+}
+
+:root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: var(--lavender);
+  color: var(--black);
+
+  max-width: 64rem;
+  margin: auto;
+  padding: 0.5rem;
+}
+
+* {
+  font-family: "Overpass Mono Variable", monospace;
+  font-feature-settings: "liga" 0;
+}
+
+h1,
+h1 a,
+h2 {
+  font-family: "Gabarito Variable", system-ui, sans-serif;
+  font-weight: 700;
+}
+
+a {
+  color: var(--black);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: var(--black);
+}
+
+summary,
+button {
+  cursor: pointer;
+}
+
+input {
+  background-color: transparent;
+  border: 1px solid var(--black);
+}
+
+a:hover,
+summary:hover,
+button:hover {
+  color: var(--green);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.flex-pad-gap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-pad-gap > * {
+  width: 100%;
+}

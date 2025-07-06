@@ -1,0 +1,106 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import BaseLayout from "./BaseLayout.astro";
+import { useTranslations, type SupportedLocale } from "@lib/i18n.ts";
+
+const locale = Astro.currentLocale! as SupportedLocale;
+const i18n = useTranslations(locale);
+---
+
+<BaseLayout>
+  <nav>
+    <a class="index-link" href={getRelativeLocaleUrl(locale, "index")}>
+      {i18n("view the index")}
+    </a>
+  </nav>
+
+  <h2>{i18n("About the Saudi Cyberfeminist Visual Index (SCFVI)")}</h2>
+  <p>
+    {
+      i18n(
+        "The Saudi Cyberfeminist Visual Index (SCFVI) is an open-source, web-based platform developed as part of an academic study. Rooted in feminist digital indexing practices and Saudi feminist ethics, the SCFVI serves as an interactive and searchable digital index documenting the Saudi Cyberfeminist Movement (SCM) from 2011 to 2021 and its continuing impact.",
+      )
+    }
+  </p>
+  <p>
+    {
+      i18n(
+        "Focusing on two pivotal campaigns — #EndMaleGuardianship and #Women2Drive — the SCFVI captures the narratives, strategies, and achievements of these landmark movements. By indexing social media posts, blog entries, images, and videos, the SCFVI safeguards these ephemeral materials from digital erasure while preserving the legacy of Saudi cyberfeminism.",
+      )
+    }
+  </p>
+  <p>
+    {
+      i18n(
+        "The SCFVI is more than an archive; it is a living, dynamic resource designed to function as a historical record, a pedagogical tool, and a reference for scholars, artists, and activists. By preserving the contributions of Saudi cyberfeminists, it enhances global understanding of digital feminist activism while emphasizing the intersection of gender, technology, and culture in Saudi Arabia.",
+      )
+    }
+  </p>
+
+  <h2>{i18n("Download")}</h2>
+  <p>
+    {
+      i18n(
+        "To ensure long-term access, data integrity, and decentralized distribution, the archive is available through the InterPlanetary File System (IPFS). The full archive is downloadable with the following IPNS name:",
+      )
+    }
+    <br />
+    <a
+      href="https://ipfs.scfvi.com/ipns/k51qzi5uqu5dk2utf9pdq5720xex3skpfyc6bh52htsib3iwhk98661izn0x4x"
+    >
+      /ipns/k51qzi5uqu5dk2utf9pdq5720xex3skpfyc6bh52htsib3iwhk98661izn0x4x
+    </a>
+    <br />
+  </p>
+  <p>
+    <a href="https://docs.ipfs.tech/quickstart/retrieve/"
+      >{
+        i18n(
+          "Refer to the official IPFS retrieval documentation for retrieval options.",
+        )
+      }
+    </a>
+  </p>
+
+  <h2>{i18n("Copyright and Usage")}</h2>
+  <p>
+    {
+      i18n(
+        "All materials featured in the SCFVI are curated with the utmost respect for the rights and contributions of their creators. The platform adheres to strict copyright practices, ensuring that all content is attributed appropriately. Visitors are welcome to use the SCFVI as a resource for educational and research purposes but are required to provide proper acknowledgment of the platform and its contributors in any derivative work.",
+      )
+    }
+  </p>
+
+  <h2>{i18n("Disclaimer")}</h2>
+  <p>
+    {
+      i18n(
+        "The Saudi Cyberfeminist Visual Index is a non-commercial, educational project aimed at documenting and preserving publicly available content related to Saudi feminist digital campaigns. All external links provided on this site lead to third-party websites, and the content they contain remains the intellectual property of their original creators. This index serves only as a reference for researchers, and we do not claim ownership of the linked materials. If any content owners have concerns about the inclusion of their material, they are welcome to contact us for resolution.",
+      )
+    }
+  </p>
+
+  <h2>{i18n("Contact")}</h2>
+  <p>
+    {
+      i18n(
+        "For submissions, inquiries, permissions, or collaborations, please contact the site maintainers at",
+      )
+    }
+    <a href="mailto:scfvi.com@gmail.com">scfvi.com@gmail.com</a>.
+  </p>
+
+  <style>
+    nav {
+      display: grid;
+      place-content: center;
+      margin: 2rem;
+    }
+
+    .index-link {
+      font-size: 1.25rem;
+      width: 100%;
+      margin: auto;
+    }
+  </style>
+</BaseLayout>

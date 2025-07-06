@@ -1,0 +1,82 @@
+---
+import { getAllCampaigns, getAllTypes } from "@lib/api.ts";
+import FilterInput from "./FilterInput.svelte";
+import FilterToggle from "./FilterToggle.svelte";
+import { useTranslations, type SupportedLocale } from "@lib/i18n.ts";
+
+const locale = Astro.currentLocale! as SupportedLocale;
+const i18n = useTranslations(locale);
+
+const campaigns = await getAllCampaigns();
+const types = await getAllTypes();
+---
+
+<div class="flex-pad-gap">
+  <fieldset class="search">
+    <legend>{i18n("search fields")}</legend>
+    <div class="flex-pad-gap">
+      <label>
+        {i18n("title")}
+        <FilterInput key="title" client:load />
+      </label>
+      <label>
+        {i18n("author")}
+        <FilterInput key="author" client:load />
+      </label>
+      <label>
+        {i18n("year")}
+        <FilterInput key="year" client:load />
+      </label>
+      <label>
+        {i18n("link")}
+        <FilterInput key="link" client:load />
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>{i18n("campaigns")}</legend>
+    <div class="flex-pad-gap">
+      {
+        campaigns.map((campaign) => (
+          <FilterToggle
+            key={"campaigns"}
+            value={campaign.name}
+            values={campaigns.map((c) => c.name)}
+            client:load
+          >
+            <Fragment>{campaign.name}</Fragment>
+          </FilterToggle>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>{i18n("content types")}</legend>
+    <div class="flex-pad-gap">
+      {
+        types.map((type) => (
+          <FilterToggle
+            key={"types"}
+            value={type.name}
+            values={types.map((t) => t.name)}
+            client:load
+          >
+            <Fragment>{i18n(type.name)}</Fragment>
+          </FilterToggle>
+        ))
+      }
+    </div>
+  </fieldset>
+</div>
+
+<style>
+  fieldset {
+    border: 1px solid var(--black);
+  }
+
+  .flex-pad-gap {
+    gap: 0.5rem;
+  }
+</style>

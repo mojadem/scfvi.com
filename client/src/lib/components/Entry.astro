@@ -1,0 +1,61 @@
+---
+import type { Entry } from "@lib/types.ts";
+import EntryHeader from "./EntryHeader.svelte";
+import EntryDetails from "./EntryDetails.astro";
+import { useTranslations, type SupportedLocale } from "@lib/i18n.ts";
+
+interface Props {
+  entry: Entry;
+}
+
+const { entry } = Astro.props as Props;
+
+const locale = Astro.currentLocale! as SupportedLocale;
+const i18n = useTranslations(locale);
+---
+
+<script>
+  import { filteredEntries } from "@lib/stores/entries.ts";
+  import { getPageOfEntry, page } from "@lib/stores/page.ts";
+  import { effect } from "nanostores";
+
+  class EntryWrapper extends HTMLElement {
+    connectedCallback() {
+      const id = this.dataset.id!;
+      const el = document.getElementById(id)!;
+
+      effect([page, filteredEntries], (page) => {
+        if (getPageOfEntry(id) === page) {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      });
+    }
+  }
+
+  customElements.define("entry-wrapper", EntryWrapper);
+</script>
+
+<entry-wrapper id={entry.id} data-id={entry.id}>
+  <article class="flex-pad-gap">
+    <header>
+      <EntryHeader entry={entry} client:load>
+        <Fragment slot="type">{i18n(entry.expand.type.name)}</Fragment>
+      </EntryHeader>
+    </header>
+    <EntryDetails {entry} />
+  </article>
+</entry-wrapper>
+
+<style>
+  article {
+    padding: 1rem;
+    border-top: 1px solid var(--black);
+    gap: 0.5rem;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>

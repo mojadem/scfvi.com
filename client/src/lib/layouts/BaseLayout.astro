@@ -1,0 +1,68 @@
+---
+import "@fontsource-variable/gabarito";
+import "@fontsource-variable/overpass-mono";
+import "@lib/global.css";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  removeLocaleFromUrl,
+  supportedLocales,
+  useTranslations,
+  type SupportedLocale,
+} from "@lib/i18n.ts";
+
+const locale = Astro.currentLocale! as SupportedLocale;
+const i18n = useTranslations(locale);
+
+function formatLocaleLink(locale: SupportedLocale) {
+  return getRelativeLocaleUrl(locale, removeLocaleFromUrl(Astro.url.pathname));
+}
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>SCFVI</title>
+  </head>
+  <body>
+    <h1>
+      <a href={getRelativeLocaleUrl(locale, "")}>SCFVI</a>
+    </h1>
+    <slot />
+    <footer>
+      <ul>
+        {i18n("languages")}:
+        {
+          supportedLocales.map((l) => (
+            <li>
+              <a href={formatLocaleLink(l)}>{l}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </footer>
+  </body>
+</html>
+
+<style>
+  h1 a {
+    color: black;
+    text-decoration: none;
+  }
+
+  h1 a:hover {
+    color: var(--green);
+  }
+
+  footer {
+    margin-top: 2rem;
+  }
+
+  li {
+    list-style: none;
+    display: inline;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import {
+  type Campaign,
+  type Entry as EntryType,
+  type Type,
+} from "@lib/types.ts";
+import Entry from "./Entry.astro";
+import EntryListCounter from "./EntryListCounter.svelte";
+import Pagination from "./Pagination.svelte";
+
+interface Props {
+  entries: EntryType[];
+  campaigns: Campaign[];
+  types: Type[];
+}
+
+const { entries, campaigns, types } = Astro.props as Props;
+---
+
+<script>
+  import { entries, campaigns, types } from "@lib/stores/entries.ts";
+
+  class EntryListWrapper extends HTMLElement {
+    connectedCallback() {
+      entries.set(JSON.parse(this.dataset.entries!));
+      campaigns.set(JSON.parse(this.dataset.campaigns!));
+      types.set(JSON.parse(this.dataset.types!));
+    }
+  }
+
+  customElements.define("entry-list-wrapper", EntryListWrapper);
+</script>
+
+<EntryListCounter client:load />
+<entry-list-wrapper
+  data-entries={JSON.stringify(entries)}
+  data-campaigns={JSON.stringify(campaigns)}
+  data-types={JSON.stringify(types)}
+>
+  {entries.map((entry) => <Entry {entry} />)}
+</entry-list-wrapper>
+<Pagination client:only="svelte" />
