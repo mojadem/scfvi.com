@@ -28,9 +28,23 @@ function formatLocaleLink(locale: SupportedLocale) {
     <title>SCFVI</title>
   </head>
   <body>
-    <h1>
-      <a href={getRelativeLocaleUrl(locale, "")}>SCFVI</a>
-    </h1>
+    <header>
+      <a href={getRelativeLocaleUrl(locale, "")}>
+        <svg
+          viewBox="0 0 400 400"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M37.1967 95.998L18.7901 92.1864L8 115.691L20.0595 118.868L70.8364 199L87 266.5L150.175 359L171.121 341.848L232.688 334.224L236.496 341.848L246.017 338.671L249.825 327.872L282.5 309L381.845 282.132L392 243.381L381.845 230.04L331.702 224.323L253.633 115.691L190 104.5L93.0512 42L56.238 50.2585L70.8364 71.8577L37.1967 95.998Z"
+            stroke-width="30"
+          >
+          </path>
+        </svg>
+        <h1>SCFVI</h1>
+      </a>
+    </header>
+
     <slot />
     <footer>
       <ul>
@@ -48,13 +62,28 @@ function formatLocaleLink(locale: SupportedLocale) {
 </html>
 
 <style>
-  h1 a {
-    color: black;
+  header {
+    width: fit-content;
+  }
+
+  header a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     text-decoration: none;
   }
 
-  h1 a:hover {
+  header svg {
+    height: 2.5em;
+    width: auto;
+    stroke: var(--black);
+  }
+
+  header a:hover {
     color: var(--green);
+    svg {
+      stroke: var(--green);
+    }
   }
 
   footer {
